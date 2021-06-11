@@ -26,6 +26,7 @@ public class FuncionarioDAO {
             stmt.setString(3, funcionario.getEmail());
             stmt.setString(4, funcionario.getSenha());
             stmt.setString(5, funcionario.getFuncao());
+            stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }

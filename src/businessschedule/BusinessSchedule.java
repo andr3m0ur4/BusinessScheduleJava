@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businessschedule;
+
+import classes.Funcionario;
+import classes.dao.FuncionarioDAO;
 
 /**
  *
@@ -15,7 +13,10 @@ public class BusinessSchedule {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        Funcionario funcionario = new Funcionario(1, "Andre", "andre@teste.com", "123", "Op Audio");
+        
+        funcionarioDAO.inserir(funcionario);
     }
     
 }
