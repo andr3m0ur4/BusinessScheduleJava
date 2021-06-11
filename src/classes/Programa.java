@@ -8,19 +8,21 @@ public class Programa {
     private String tipo;
     private String data;
     
-    Switcher switcher = new Switcher();
-    Estudio estudio = new Estudio();
+    Switcher switcher;
+    Estudio estudio;
     
     public Programa() {
     }
     
-    public Programa(int id, String nome, String horarioInicio, String horarioFim, String tipo, String data) {
+    public Programa(int id, String nome, String horarioInicio, String horarioFim, String tipo, String data, Switcher switcher, Estudio estudio) {
         setId(id);
         setNome(nome);
         setHorarioInicio(horarioInicio);
         setHorarioFim(horarioFim);
         setTipo(tipo);
         setData(data);
+        setSwitcher(switcher);
+        setEstudio(estudio);
     }
 
     public int getId() {
@@ -69,6 +71,22 @@ public class Programa {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public Switcher getSwitcher() {
+        return switcher;
+    }
+
+    public void setSwitcher(Switcher switcher) {
+        this.switcher = switcher;
+    }
+
+    public Estudio getEstudio() {
+        return estudio;
+    }
+
+    public void setEstudio(Estudio estudio) {
+        this.estudio = estudio;
     }
 
     @Override
