@@ -1,16 +1,16 @@
 package classes;
 
-public class Funcionario {
+public class Usuario {
     private int id;
     private String nome;
     private String email;
     private String senha;
     private String funcao;
 
-    public Funcionario() {
+    public Usuario() {
     }
 
-    public Funcionario(int id, String nome, String email, String senha, String funcao) {
+    public Usuario(int id, String nome, String email, String senha, String funcao) {
         setId(id);
         setNome(nome);
         setEmail(email);
