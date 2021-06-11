@@ -1,25 +1,19 @@
 package classes;
 
-public class Programa {
+public class FuncionarioHorario {
     private int id;
-    private String nome;
     private String horarioInicio;
     private String horarioFim;
-    private String tipo;
     private String data;
     
-    Switcher switcher = new Switcher();
-    Estudio estudio = new Estudio();
-    
-    public Programa() {
+    public FuncionarioHorario() {
     }
     
-    public Programa(int id, String nome, String horarioInicio, String horarioFim, String tipo, String data) {
+    public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data) {
+        
         setId(id);
-        setNome(nome);
         setHorarioInicio(horarioInicio);
         setHorarioFim(horarioFim);
-        setTipo(tipo);
         setData(data);
     }
 
@@ -29,14 +23,6 @@ public class Programa {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getHorarioInicio() {
@@ -55,14 +41,6 @@ public class Programa {
         this.horarioFim = horarioFim;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getData() {
         return data;
     }
@@ -71,12 +49,12 @@ public class Programa {
         this.data = data;
     }
 
+    
+
     @Override
     public String toString() {
-        return "ID: " + id + "Nome: " + nome + "Horario de Inicio: " + horarioInicio + "Horario de Fim: " 
-             + horarioFim + "Tipo: " + tipo + "Data: " + data + "Switcher: " + switcher + "Estudio: " + estudio;
-        
+        return "Id: " + id + "Horario Inicio: " + horarioInicio + "Horario Fim: " +
+                horarioFim + "Data: " + data;
     }
-    
     
 }
