@@ -51,6 +51,10 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
+        if (senha == null || senha.isEmpty()) {
+            throw new IllegalArgumentException("Nome inválido");
+        }
+        
         this.senha = senha;
     }
 
@@ -64,6 +68,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "ID: " + id + "Nome: " + nome + "E-mail: " + email + "Função: " + funcao;
+        return "ID: " + id + " - Nome: " + nome + " - E-mail: " + email + " - Função: " + funcao;
     }
 }

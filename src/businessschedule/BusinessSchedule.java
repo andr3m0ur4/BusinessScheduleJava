@@ -14,9 +14,17 @@ public class BusinessSchedule {
      */
     public static void main(String[] args) {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        Funcionario funcionario = new Funcionario(1, "Andre", "andre@teste.com", "123", "Op Audio");
+        Funcionario funcionario = new Funcionario(4, "Fulano de Tal", "fulano@teste.com", "fulano", "Op Camera");
         
-        funcionarioDAO.inserir(funcionario);
+        /*for (Funcionario funcionario : funcionarioDAO.listar()) {
+            System.out.println(funcionario);
+        }*/
+        //funcionarioDAO.alterar(funcionario);
+        //System.out.println(funcionarioDAO.buscar(4));
+        
+        //funcionarioDAO.excluir(funcionario);
+        //funcionarioDAO.inserir(funcionario);
+        System.out.println( funcionarioDAO.lastId());
     }
     
 }
