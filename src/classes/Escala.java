@@ -69,9 +69,9 @@ public class Escala {
 
     @Override
     public String toString() {
-         return "ID: " + id + "Ano: " + ano + "Data de Inicio: " + dataInicio + "Data de Fim: " 
-             + dataFim + "Funcionario: " + usuario 
-                + "Horario do Funcionario: " + funcionarioHorario ;
+         return "ID: " + id + " - Ano: " + ano + " - Data de Inicio: " + dataInicio + " - Data de Fim: " 
+             + dataFim + " - Funcionario: " + usuario 
+                + " - Horario do Funcionario: " + funcionarioHorario ;
         
     }
     

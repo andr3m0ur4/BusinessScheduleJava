@@ -30,8 +30,9 @@ public class ProgramaDAO {
             while (rs.next()) {
                 Programa programa = new Programa(
                         
-                        /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
+                        // Mesmo conceito aqui pra solução, se vc conseguir fazer o da escala, esse será fácil
+                        // Dica: teste a consulta no banco antes, lá tem um lugar pra isso.
+                        //rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
                 
                 );
                 programas.add(programa);
@@ -57,8 +58,8 @@ public class ProgramaDAO {
             rs.next();
             
             programa = new Programa(
-                        /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
+                        // Outra vez o msm conceito de INNER JOIN, tente vc mesmo construir a consulta
+                        //rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
             
             );
             
@@ -84,8 +85,9 @@ public class ProgramaDAO {
             stmt.setString(6, programa.getData());
             
             /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-            stmt.setString(7, programa.getSwitcher());
-            stmt.setString(8, programa.getEstudio());
+            // Acredito que agora tenha ficado claro como corrigir esse tbm
+            //stmt.setString(7, programa.getSwitcher());
+            //stmt.setString(8, programa.getEstudio());
             
             
             stmt.execute();
@@ -107,8 +109,9 @@ public class ProgramaDAO {
             stmt.setString(5, programa.getData());
             
             /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-            stmt.setString(6, programa.getSwitcher());
-            stmt.setString(7, programa.getEstudio());
+            // Vc consegue
+            //stmt.setString(6, programa.getSwitcher());
+            //stmt.setString(7, programa.getEstudio());
             
           
             stmt.setInt(8, programa.getId());

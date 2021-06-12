@@ -17,6 +17,13 @@ public class Usuario {
         setSenha(senha);
         setFuncao(funcao);
     }
+    
+    public Usuario(int id, String nome, String email, String funcao) {
+        setId(id);
+        setNome(nome);
+        setEmail(email);
+        setFuncao(funcao);
+    }
 
     public int getId() {
         return id;

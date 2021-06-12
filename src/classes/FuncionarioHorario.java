@@ -53,8 +53,8 @@ public class FuncionarioHorario {
 
     @Override
     public String toString() {
-        return "Id: " + id + "Horario Inicio: " + horarioInicio + "Horario Fim: " +
-                horarioFim + "Data: " + data;
+        return "Id: " + id + " - Horario Inicio: " + horarioInicio + " - Horario Fim: " +
+                horarioFim + " - Data: " + data;
     }
     
 }
