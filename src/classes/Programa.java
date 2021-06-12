@@ -1,5 +1,8 @@
 package classes;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Programa {
     private int id;
     private String nome;
@@ -88,7 +91,7 @@ public class Programa {
     public void setEstudio(Estudio estudio) {
         this.estudio = estudio;
     }
-
+    
     @Override
     public String toString() {
         return "ID: " + id + "Nome: " + nome + "Horario de Inicio: " + horarioInicio + "Horario de Fim: " 
