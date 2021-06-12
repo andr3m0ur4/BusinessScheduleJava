@@ -1,6 +1,8 @@
 package classes.dao;
 
 import classes.Programa;
+import classes.Switcher;
+import classes.Estudio;
 import config.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class ProgramaDAO {
     
-         private Connection con;
+    private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
     
@@ -20,20 +22,28 @@ public class ProgramaDAO {
     }
     
     public List<Programa> listar() {
-        List<Programa> programas = new ArrayList<>();
-        String sql = "SELECT * FROM programa";
+        List<Programa> programas = new ArrayList<>();      
+             String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
+                    "FROM programa AS p\n" +
+                    "INNER JOIN switcher AS s\n" +
+                    "ON p.id_switcher = s.id\n" +
+                    "INNER JOIN estudio AS es\n" +
+                    "ON p.id_estudio = es.id";
+        
         
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
+                 Switcher switcher = new Switcher(
+                        rs.getInt("id_switcher"), rs.getString("nome_switcher")
+                );
+                Estudio estudio = new Estudio(
+                        rs.getInt("id_estudio"), rs.getString("nome_estudio")
+                );
                 Programa programa = new Programa(
-                        
-                        // Mesmo conceito aqui pra solução, se vc conseguir fazer o da escala, esse será fácil
-                        // Dica: teste a consulta no banco antes, lá tem um lugar pra isso.
-                        //rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
-                
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), switcher, estudio
                 );
                 programas.add(programa);
             }
@@ -49,7 +59,13 @@ public class ProgramaDAO {
     
     public Programa buscar(int id) {
         Programa programa = null;
-        String sql = "SELECT * FROM programa WHERE id = ?";
+           String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
+                    "FROM programa AS p\n" +
+                    "INNER JOIN switcher AS s\n" +
+                    "ON p.id_switcher = s.id\n" +
+                    "INNER JOIN estudio AS es\n" +
+                    "ON p.id_estudio = es.id\n" +
+                    "WHERE p.id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -57,11 +73,15 @@ public class ProgramaDAO {
             rs = stmt.executeQuery();
             rs.next();
             
-            programa = new Programa(
-                        // Outra vez o msm conceito de INNER JOIN, tente vc mesmo construir a consulta
-                        //rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), rs.getInt("switcher"), rs.getInt("estudio")
-            
-            );
+             Switcher switcher = new Switcher(
+                        rs.getInt("id_switcher"), rs.getString("nome_switcher")
+                );
+                Estudio estudio = new Estudio(
+                        rs.getInt("id_estudio"), rs.getString("nome_estudio")
+                );
+                 programa = new Programa(
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), switcher, estudio
+                );
             
             rs.close();
             stmt.close();
@@ -83,13 +103,8 @@ public class ProgramaDAO {
             stmt.setString(4, programa.getHorarioFim());
             stmt.setString(5, programa.getTipo());
             stmt.setString(6, programa.getData());
-            
-            /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-            // Acredito que agora tenha ficado claro como corrigir esse tbm
-            //stmt.setString(7, programa.getSwitcher());
-            //stmt.setString(8, programa.getEstudio());
-            
-            
+            stmt.setInt(7, programa.getSwitcher().getId());
+            stmt.setInt(8, programa.getEstudio().getId()); 
             stmt.execute();
             stmt.close();
         } catch (SQLException erro) {
@@ -106,14 +121,9 @@ public class ProgramaDAO {
             stmt.setString(2, programa.getHorarioInicio());
             stmt.setString(3, programa.getHorarioFim());
             stmt.setString(4, programa.getTipo());
-            stmt.setString(5, programa.getData());
-            
-            /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-            // Vc consegue
-            //stmt.setString(6, programa.getSwitcher());
-            //stmt.setString(7, programa.getEstudio());
-            
-          
+            stmt.setString(5, programa.getData());  
+            stmt.setInt(6, programa.getSwitcher().getId());
+            stmt.setInt(7, programa.getEstudio().getId());
             stmt.setInt(8, programa.getId());
             stmt.execute();
             stmt.close();
