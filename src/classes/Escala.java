@@ -9,12 +9,14 @@ public class Escala {
     FuncionarioHorario funcionarioHorario = new FuncionarioHorario();
     Usuario usuario = new Usuario();
     
-    public Escala(int id, String dataInicio, String dataFim, String ano) {
+    public Escala(int id, String dataInicio, String dataFim, String ano,FuncionarioHorario funcionarioHorario,Usuario usuario) {
       
         setId(id);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         setAno(ano);
+        setFuncionarioHorario(funcionarioHorario);
+        setUsuario(usuario);
     }
 
     public int getId() {
@@ -47,6 +49,22 @@ public class Escala {
 
     public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public FuncionarioHorario getFuncionarioHorario() {
+        return funcionarioHorario;
+    }
+
+    public void setFuncionarioHorario(FuncionarioHorario funcionarioHorario) {
+        this.funcionarioHorario = funcionarioHorario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
