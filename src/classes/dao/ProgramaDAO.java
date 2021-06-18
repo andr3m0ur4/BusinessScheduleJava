@@ -1,6 +1,7 @@
 package classes.dao;
 
 import classes.Programa;
+import lib.DataHora;
 import classes.Switcher;
 import classes.Estudio;
 import config.Conexao;
@@ -94,15 +95,15 @@ public class ProgramaDAO {
     
     public void inserir(Programa programa) {
         String sql = "INSERT INTO programa VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, programa.getId());
             stmt.setString(2, programa.getNome());
-            stmt.setString(3, programa.getHorarioInicio());
-            stmt.setString(4, programa.getHorarioFim());
+            stmt.setString(3, DataHora.personalizarHora(programa.getHorarioInicio()));
+            stmt.setString(4, DataHora.personalizarHora(programa.getHorarioFim()));
             stmt.setString(5, programa.getTipo());
-            stmt.setString(6, programa.getData());
+            stmt.setString(6, DataHora.personalizarData(programa.getData()));
             stmt.setInt(7, programa.getSwitcher().getId());
             stmt.setInt(8, programa.getEstudio().getId()); 
             stmt.execute();
@@ -112,16 +113,16 @@ public class ProgramaDAO {
         }
     }
     
-    public void alterar(Programa programa) {
+   public void alterar(Programa programa) {
         String sql = "UPDATE programa SET nome = ?, horario_inicio = ?, horario_fim = ?, tipo = ?, data = ?, switcher = ?, estudio = ? WHERE id = ?";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, programa.getNome());
-            stmt.setString(2, programa.getHorarioInicio());
-            stmt.setString(3, programa.getHorarioFim());
+            stmt.setString(2, DataHora.personalizarHora(programa.getHorarioInicio()));
+            stmt.setString(3, DataHora.personalizarHora(programa.getHorarioFim()));
             stmt.setString(4, programa.getTipo());
-            stmt.setString(5, programa.getData());  
+            stmt.setString(5, DataHora.personalizarData(programa.getData()));
             stmt.setInt(6, programa.getSwitcher().getId());
             stmt.setInt(7, programa.getEstudio().getId());
             stmt.setInt(8, programa.getId());
@@ -161,3 +162,5 @@ public class ProgramaDAO {
         return id + 1;
     }
 }
+
+

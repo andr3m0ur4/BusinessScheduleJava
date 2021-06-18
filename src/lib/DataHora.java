@@ -75,4 +75,13 @@ public class DataHora {
 
         return date;
     }
+    
+    public static String personalizarHora(Date date) {
+        return horaFormatada.format(date);
+    }
+
+    public static String personalizarData(Date date) {
+        return dataFormatada.format(date);
+    }
+    
 }

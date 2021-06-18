@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lib.DataHora;
 
 public class EscalaDAO {
     private Connection con;
@@ -97,8 +98,8 @@ public class EscalaDAO {
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, escala.getId());
-            stmt.setString(2, escala.getDataInicio());
-            stmt.setString(3, escala.getDataFim());
+            stmt.setString(2, DataHora.personalizarData(escala.getDataInicio()));
+            stmt.setString(3, DataHora.personalizarData(escala.getDataFim()));
             stmt.setString(4, escala.getAno());
             stmt.setInt(5, escala.getFuncionarioHorario().getId());
             stmt.setInt(6, escala.getUsuario().getId());
@@ -115,8 +116,8 @@ public class EscalaDAO {
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, escala.getDataInicio());
-            stmt.setString(2, escala.getDataFim());
+            stmt.setString(1, DataHora.personalizarData(escala.getDataInicio()));
+            stmt.setString(2, DataHora.personalizarData(escala.getDataFim()));
             stmt.setString(3, escala.getAno());
             stmt.setInt(4, escala.getFuncionarioHorario().getId());
             stmt.setInt(5, escala.getUsuario().getId());
@@ -157,3 +158,4 @@ public class EscalaDAO {
         return id + 1;
     }
 }
+
