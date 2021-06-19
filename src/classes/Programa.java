@@ -1,7 +1,7 @@
 package classes;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+import lib.DataHora;
 
 public class Programa {
     private int id;
@@ -44,19 +44,27 @@ public class Programa {
         this.nome = nome;
     }
 
-    public String getHorarioInicio() {
-        return horarioInicio;
+    public Date getHorarioInicio() {
+        return DataHora.formatarHora(horarioInicio);
     }
 
     public void setHorarioInicio(String horarioInicio) {
+        if (!DataHora.validarHora(horarioInicio)) {
+            throw new IllegalArgumentException("Hora inválida");
+        }
+
         this.horarioInicio = horarioInicio;
     }
 
-    public String getHorarioFim() {
-        return horarioFim;
+    public Date getHorarioFim() {
+        return DataHora.formatarHora(horarioFim);
     }
 
     public void setHorarioFim(String horarioFim) {
+        if (!DataHora.validarHora(horarioFim)) {
+            throw new IllegalArgumentException("Hora inválida");
+        }
+
         this.horarioFim = horarioFim;
     }
 
@@ -68,11 +76,15 @@ public class Programa {
         this.tipo = tipo;
     }
 
-    public String getData() {
-        return data;
+    public Date getData() {
+        return DataHora.formatarData(data);
     }
 
     public void setData(String data) {
+        if (!DataHora.validarData(data)) {
+            throw new IllegalArgumentException("Data inválida");
+        }
+
         this.data = data;
     }
 
@@ -94,8 +106,8 @@ public class Programa {
     
     @Override
     public String toString() {
-        return "ID: " + id + "Nome: " + nome + "Horario de Inicio: " + horarioInicio + "Horario de Fim: " 
-             + horarioFim + "Tipo: " + tipo + "Data: " + data + "Switcher: " + switcher + "Estudio: " + estudio;
+        return "ID: " + id + " - Nome: " + nome + " - Horario de Inicio: " + getHorarioInicio() + " - Horario de Fim: " 
+             + horarioFim + " - Tipo: " + tipo + " - Data: " + data + " - Switcher: " + switcher + " - Estudio: " + estudio;
         
     }
     

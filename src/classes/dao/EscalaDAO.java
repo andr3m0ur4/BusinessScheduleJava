@@ -57,7 +57,13 @@ public class EscalaDAO {
     
     public Escala buscar(int id) {
         Escala escala = null;
-        String sql = "SELECT * FROM escalas WHERE id = ?";
+        String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
+                    "FROM escala AS e\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON e.id_funcionario = f.id\n" +
+                    "INNER JOIN funcionarioHorario as fh\n" +
+                    "on e.id_funcionario_horario = fh.id\n" + 
+                    " WHERE e.id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -65,12 +71,16 @@ public class EscalaDAO {
             rs = stmt.executeQuery();
             rs.next();
             
-            /*escala = new Escala(
-                    
-                        //ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING
-                         rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), rs.getString("funcionario_horario"), rs.getString("funcionario")
-            
-            );*/
+            Funcionario funcionario = new Funcionario(
+                        rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
+                );
+                FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
+                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
+                );
+                escala = new Escala(
+                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario, funcionario
+                );
+
             
             rs.close();
             stmt.close();
@@ -90,9 +100,6 @@ public class EscalaDAO {
             stmt.setString(2, escala.getDataInicio());
             stmt.setString(3, escala.getDataFim());
             stmt.setString(4, escala.getAno());
-            
-             // Erro corrigido, tente aplicar o msm conceito nos outros, eu peguei o objeto e depois peguei o id dentro desse objeto,
-             // justamente o ID q eu preciso inserir em cada coluna
             stmt.setInt(5, escala.getFuncionarioHorario().getId());
             stmt.setInt(6, escala.getUsuario().getId());
             
@@ -111,11 +118,8 @@ public class EscalaDAO {
             stmt.setString(1, escala.getDataInicio());
             stmt.setString(2, escala.getDataFim());
             stmt.setString(3, escala.getAno());
-            
-             /*ERRO: SWITCHER E ESTUDIO NÃO PODE SER CONVERTIDO EM STRING*/
-            //stmt.setString(4, escala.getFuncionarioHorario());
-            //stmt.setString(5, escala.getUsuario());
-            
+            stmt.setInt(4, escala.getFuncionarioHorario().getId());
+            stmt.setInt(5, escala.getUsuario().getId());
             stmt.setInt(6, escala.getId());
             stmt.execute();
             stmt.close();

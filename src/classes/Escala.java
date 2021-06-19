@@ -1,5 +1,9 @@
 package classes;
 
+import java.util.Date;
+
+import lib.DataHora;
+
 public class Escala {
     private int id;
     private String dataInicio;
@@ -10,7 +14,6 @@ public class Escala {
     Usuario usuario;
     
     public Escala(int id, String dataInicio, String dataFim, String ano, FuncionarioHorario funcionarioHorario, Usuario usuario) {
-      
         setId(id);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
@@ -27,19 +30,27 @@ public class Escala {
         this.id = id;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public Date getDataInicio() {
+        return DataHora.formatarData(dataInicio);
     }
 
     public void setDataInicio(String dataInicio) {
+        if (!DataHora.validarData(dataInicio)) {
+            throw new IllegalArgumentException("Data inválida");
+        }
+
         this.dataInicio = dataInicio;
     }
 
-    public String getDataFim() {
-        return dataFim;
+    public Date getDataFim() {
+        return DataHora.formatarData(dataFim);
     }
 
     public void setDataFim(String dataFim) {
+        if (!DataHora.validarData(dataFim)) {
+            throw new IllegalArgumentException("Data inválida");
+        }
+
         this.dataFim = dataFim;
     }
 
@@ -48,6 +59,10 @@ public class Escala {
     }
 
     public void setAno(String ano) {
+        if (!DataHora.validarAno(ano)) {
+            throw new IllegalArgumentException("Ano inválido");
+        }
+        
         this.ano = ano;
     }
 
