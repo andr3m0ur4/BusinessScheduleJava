@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministradorDAO {
-     private Connection con;
+    private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
     
@@ -125,6 +125,52 @@ public class AdministradorDAO {
         }
         
         return id + 1; 
+    }
+    
+    public boolean login(String email ,String senha){
+        
+        boolean validacao = false;
+        String sql = "SELECT * FROM administrador WHERE email = ? AND senha = ?";
+           
+         try {
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+            validacao = rs.next();
+            return validacao;
+       
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        } 
+         
+        return false;
+
+    }
+    
+        public Administrador buscarNome(String nome) {
+        Administrador administrador = null;
+        String sql = "SELECT * FROM administrador WHERE nome = ?";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            rs.next();
+            
+            administrador = new Administrador(
+                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+            );
+            
+            rs.close();
+            stmt.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        
+        return administrador;
     }
     
 }
