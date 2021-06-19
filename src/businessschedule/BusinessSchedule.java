@@ -6,6 +6,7 @@ import java.util.Date;
 
 import businessschedule.modelo.classes.Escala;
 import java.util.Scanner;
+import businessschedule.modelo.dao.AdministradorDAO;
 import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.Usuario;
 import businessschedule.modelo.classes.FuncionarioHorario;
@@ -61,7 +62,7 @@ public class BusinessSchedule {
         Programa programa = new Programa(1, "Saude e Fe", "7:00:00", "8:00:00", "tipo", "2021-06-18", switcher, estudio);
         System.out.println(programa.getData());*/
         
-        Scanner leia = new Scanner(System.in);
+        /*Scanner leia = new Scanner(System.in);
         String nome;
         
         try{
@@ -73,10 +74,12 @@ public class BusinessSchedule {
             
             System.out.println(e.getMessage());
             
-        }
+        }*/
         
         
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         
-        
+        funcionarioDAO.buscarNomeFuncionario("andre");
+
     }
 }

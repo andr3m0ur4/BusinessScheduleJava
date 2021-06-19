@@ -126,4 +126,48 @@ public class FuncionarioDAO {
         
         return id + 1;
     }
+    
+        public boolean login(String email ,String senha){
+         
+        boolean validacao = false;
+        String sql = "SELECT * FROM funcionario WHERE email = ? AND senha = ?";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+            validacao = rs.next();
+            return validacao;
+          
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        
+         return false;
+         
+    }
+        
+       public Funcionario buscarNomeFuncionario(String nome) {
+        Funcionario funcionario = null;
+        String sql = "SELECT * FROM funcionario WHERE nome = ?";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            rs.next();
+            
+            funcionario = new Funcionario(
+                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+            );
+            
+            rs.close();
+            stmt.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        
+        return funcionario;
+    }
 }
