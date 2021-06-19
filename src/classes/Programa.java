@@ -2,6 +2,7 @@ package classes;
 
 import java.util.Date;
 import lib.DataHora;
+import lib.Execoes;
 
 public class Programa {
     private int id;
@@ -33,6 +34,7 @@ public class Programa {
     }
 
     public void setId(int id) {
+        Execoes.menorQueZero("Id", id);
         this.id = id;
     }
 
@@ -41,6 +43,7 @@ public class Programa {
     }
 
     public void setNome(String nome) {
+        Execoes.isNulo("Nome", nome);
         this.nome = nome;
     }
 
@@ -73,6 +76,7 @@ public class Programa {
     }
 
     public void setTipo(String tipo) {
+        Execoes.isNulo("Tipo", tipo);
         this.tipo = tipo;
     }
 

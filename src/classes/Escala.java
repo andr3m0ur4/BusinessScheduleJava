@@ -3,6 +3,7 @@ package classes;
 import java.util.Date;
 
 import lib.DataHora;
+import lib.Execoes;
 
 public class Escala {
     private int id;
@@ -27,6 +28,7 @@ public class Escala {
     }
 
     public void setId(int id) {
+        Execoes.menorQueZero("Id", id);
         this.id = id;
     }
 

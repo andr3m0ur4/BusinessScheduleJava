@@ -1,9 +1,9 @@
 package classes.dao;
 
 import classes.Programa;
+import lib.DataHora;
 import classes.Switcher;
 import classes.Estudio;
-import lib.DataHora;
 import config.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -95,7 +95,7 @@ public class ProgramaDAO {
     
     public void inserir(Programa programa) {
         String sql = "INSERT INTO programa VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, programa.getId());
@@ -113,9 +113,9 @@ public class ProgramaDAO {
         }
     }
     
-    public void alterar(Programa programa) {
+   public void alterar(Programa programa) {
         String sql = "UPDATE programa SET nome = ?, horario_inicio = ?, horario_fim = ?, tipo = ?, data = ?, switcher = ?, estudio = ? WHERE id = ?";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, programa.getNome());
@@ -162,3 +162,5 @@ public class ProgramaDAO {
         return id + 1;
     }
 }
+
+

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lib.DataHora;
 
 public class FuncionarioHorarioDAO {
     
@@ -90,8 +91,8 @@ public class FuncionarioHorarioDAO {
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, DataHora.personalizarHora(funcionarioHorario.getHorarioInicio()));
-            stmt.setString(3, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
-            stmt.setString(4, DataHora.personalizarData(funcionarioHorario.getData()));
+            stmt.setString(2, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
+            stmt.setString(3, DataHora.personalizarData(funcionarioHorario.getData()));
             stmt.setInt(4, funcionarioHorario.getId());
             stmt.execute();
             stmt.close();
