@@ -1,10 +1,10 @@
-package classes.dao;
+package businessschedule.modelo.dao;
 
-import classes.Programa;
+import businessschedule.modelo.classes.Programa;
 import lib.DataHora;
-import classes.Switcher;
-import classes.Estudio;
-import config.Conexao;
+import businessschedule.modelo.classes.Switcher;
+import businessschedule.modelo.classes.Estudio;
+import businessschedule.util.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

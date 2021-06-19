@@ -4,19 +4,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import classes.Escala;
+import businessschedule.modelo.classes.Escala;
 import java.util.Scanner;
-import classes.Funcionario;
-import classes.Usuario;
-import classes.FuncionarioHorario;
-import classes.Programa;
-import classes.Switcher;
-import classes.Estudio;
+import businessschedule.modelo.classes.Funcionario;
+import businessschedule.modelo.classes.Usuario;
+import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.modelo.classes.Programa;
+import businessschedule.modelo.classes.Switcher;
+import businessschedule.modelo.classes.Estudio;
 //import classes.dao.EscalaDAO;
 //import classes.dao.ProgramaDAO;
-import classes.dao.SwitcherDAO;
-import classes.dao.EstudioDAO;
-import classes.dao.FuncionarioDAO;
+import businessschedule.modelo.dao.SwitcherDAO;
+import businessschedule.modelo.dao.EstudioDAO;
+import businessschedule.modelo.dao.FuncionarioDAO;
 //import classes.dao.FuncionarioHorarioDAO;
 
 /**

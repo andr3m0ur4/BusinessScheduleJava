@@ -1,7 +1,7 @@
-package classes.dao;
+package businessschedule.modelo.dao;
 
-import classes.Estudio;
-import config.Conexao;
+import businessschedule.modelo.classes.Estudio;
+import businessschedule.util.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

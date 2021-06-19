@@ -1,9 +1,9 @@
-package classes.dao;
+package businessschedule.modelo.dao;
 
-import classes.Escala;
-import classes.Funcionario;
-import classes.FuncionarioHorario;
-import config.Conexao;
+import businessschedule.modelo.classes.Escala;
+import businessschedule.modelo.classes.Funcionario;
+import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.util.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

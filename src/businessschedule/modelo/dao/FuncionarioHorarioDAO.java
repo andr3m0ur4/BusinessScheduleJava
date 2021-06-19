@@ -1,7 +1,7 @@
-package classes.dao;
+package businessschedule.modelo.dao;
 
-import classes.FuncionarioHorario;
-import config.Conexao;
+import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.util.Conexao;
 import lib.DataHora;
 
 import java.sql.Connection;

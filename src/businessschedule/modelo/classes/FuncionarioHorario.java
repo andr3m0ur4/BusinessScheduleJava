@@ -1,4 +1,4 @@
-package classes;
+package businessschedule.modelo.classes;
 
 import java.util.Date;
 

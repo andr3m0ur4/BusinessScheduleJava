@@ -1,4 +1,4 @@
-package config;
+package businessschedule.util;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

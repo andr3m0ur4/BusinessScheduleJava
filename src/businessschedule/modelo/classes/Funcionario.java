@@ -1,4 +1,4 @@
-package classes;
+package businessschedule.modelo.classes;
 
 public class Funcionario extends Usuario {
 
