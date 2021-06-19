@@ -1,5 +1,7 @@
 package classes;
 
+import lib.Execoes;
+
 public class Switcher {
     private int id;
     private String nome;
@@ -17,6 +19,7 @@ public class Switcher {
     }
 
     public void setId(int id) {
+        Execoes.menorQueZero("Id", id);
         this.id = id;
     }
 
@@ -25,6 +28,7 @@ public class Switcher {
     }
 
     public void setNome(String nome) {
+        Execoes.isNulo("Nome", nome);
         this.nome = nome;
     }
 

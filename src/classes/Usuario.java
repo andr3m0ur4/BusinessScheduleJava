@@ -1,5 +1,7 @@
 package classes;
 
+import lib.Execoes;
+
 public class Usuario {
     private int id;
     private String nome;
@@ -30,19 +32,20 @@ public class Usuario {
     }
 
     public void setId(int id) {
+        Execoes.menorQueZero("Id", id);
         this.id = id;
     }
 
     public String getNome() {
+        
+        
         return nome;
     }
 
     public void setNome(String nome) {
-        if (nome == null || nome.isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-        
+        Execoes.isNulo("Nome", nome);
         this.nome = nome;
+
     }
 
     public String getEmail() {
@@ -50,6 +53,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
+        Execoes.isNulo("Email", email);
         this.email = email;
     }
 
@@ -58,9 +62,8 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        if (senha == null || senha.isEmpty()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
+        Execoes.isNulo("Senha", senha);
+        Execoes.verificaTamanho("Senha", senha);
         
         this.senha = senha;
     }
@@ -70,8 +73,11 @@ public class Usuario {
     }
 
     public void setFuncao(String funcao) {
+        Execoes.isNulo("Funçao", funcao);
         this.funcao = funcao;
     }
+    
+ 
 
     @Override
     public String toString() {
