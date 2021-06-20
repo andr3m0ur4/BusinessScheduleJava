@@ -128,7 +128,7 @@ public class AdministradorDAO {
         return id + 1; 
     }
     
-    public boolean login(Administrador administrador) {
+    public boolean login(String email ,String senha){
         
         boolean validacao = false;
         String sql = "SELECT * FROM administrador WHERE email = ? AND senha = ?";
@@ -136,8 +136,8 @@ public class AdministradorDAO {
          try {
             
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, administrador.getEmail());
-            stmt.setString(2, administrador.getSenha());
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
             rs = stmt.executeQuery();
             validacao = rs.next();
             return validacao;
@@ -151,18 +151,18 @@ public class AdministradorDAO {
 
     }
     
-    public Administrador buscarNome(String nome) {
+        public Administrador buscarNome(String nome) {
         Administrador administrador = null;
-        String sql = "SELECT * FROM administrador WHERE nome LIKE ?";
+        String sql = "SELECT * FROM administrador WHERE nome = ?";
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, '%' + nome + '%');
+            stmt.setString(1, nome);
             rs = stmt.executeQuery();
             rs.next();
             
             administrador = new Administrador(
-                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
+                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
             );
             
             rs.close();

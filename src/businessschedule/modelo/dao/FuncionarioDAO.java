@@ -127,15 +127,15 @@ public class FuncionarioDAO {
         return id + 1;
     }
     
-    public boolean login(Funcionario funcionario) {
+        public boolean login(String email ,String senha){
          
         boolean validacao = false;
         String sql = "SELECT * FROM funcionario WHERE email = ? AND senha = ?";
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, funcionario.getEmail());
-            stmt.setString(2, funcionario.getSenha());
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
             rs = stmt.executeQuery();
             validacao = rs.next();
             return validacao;
@@ -148,18 +148,18 @@ public class FuncionarioDAO {
          
     }
         
-    public Funcionario buscarNomeFuncionario(String nome) {
+       public Funcionario buscarNomeFuncionario(String nome) {
         Funcionario funcionario = null;
-        String sql = "SELECT * FROM funcionario WHERE nome LIKE ?";
+        String sql = "SELECT * FROM funcionario WHERE nome = ?";
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, '%' + nome + '%');
+            stmt.setString(1, nome);
             rs = stmt.executeQuery();
             rs.next();
             
             funcionario = new Funcionario(
-                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
+                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
             );
             
             rs.close();
