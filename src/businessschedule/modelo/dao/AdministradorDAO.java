@@ -50,11 +50,12 @@ public class AdministradorDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-            administrador = new Administrador(
-                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
-            );
+            if (rs.next()) {
+                administrador = new Administrador(
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+                );
+            }
             
             rs.close();
             stmt.close();

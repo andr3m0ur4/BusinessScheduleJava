@@ -76,10 +76,11 @@ public class BusinessSchedule {
             
         }*/
         
+        /*AdministradorDAO funcionarioDAO = new AdministradorDAO();
         
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         
         funcionarioDAO.buscarNomeFuncionario("andre");
-
+*/
     }
 }

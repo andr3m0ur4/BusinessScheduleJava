@@ -3,7 +3,7 @@ package businessschedule.modelo.classes;
 import java.util.Date;
 
 import lib.DataHora;
-import lib.Execoes;
+import lib.Excecoes;
 
 public class FuncionarioHorario {
     private int id;
@@ -27,7 +27,7 @@ public class FuncionarioHorario {
     }
 
     public void setId(int id) {
-        Execoes.menorQueZero("Id", id);
+        Excecoes.menorQueZero("Id", id);
         this.id = id;
     }
 
