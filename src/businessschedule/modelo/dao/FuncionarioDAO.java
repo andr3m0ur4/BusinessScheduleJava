@@ -28,7 +28,7 @@ public class FuncionarioDAO {
             
             while (rs.next()) {
                 Funcionario funcionario = new Funcionario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
                 );
                 funcionarios.add(funcionario);
             }
