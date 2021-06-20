@@ -30,12 +30,12 @@ public class BusinessSchedule {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        /*FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         //Funcionario funcionario = new Funcionario(4, "Fulano de Tal", "fulano@teste.com", "fulano", "Op Camera");
         
         for (Funcionario funcionario : funcionarioDAO.listar()) {
             System.out.println(funcionario);
-        } */
+        }*/
         //funcionarioDAO.alterar(funcionario);
         //System.out.println(funcionarioDAO.buscar(4));
         
@@ -76,11 +76,10 @@ public class BusinessSchedule {
             
         }*/
         
-        /*AdministradorDAO funcionarioDAO = new AdministradorDAO();
+        /*AdministradorDAO funcionarioDAO = new AdministradorDAO();*/
         
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         
-        funcionarioDAO.buscarNomeFuncionario("andre");
-*/
+        funcionarioDAO.buscarNomeFuncionario("a");
     }
 }

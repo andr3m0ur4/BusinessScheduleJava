@@ -28,7 +28,7 @@ public class FuncionarioDAO {
             
             while (rs.next()) {
                 Funcionario funcionario = new Funcionario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
                 );
                 funcionarios.add(funcionario);
             }
@@ -156,11 +156,11 @@ public class FuncionarioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
             rs = stmt.executeQuery();
-            rs.next();
-            
-            funcionario = new Funcionario(
-                    rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
-            );
+            if (rs.next()) {
+                funcionario = new Funcionario(
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
+                );
+            }
             
             rs.close();
             stmt.close();
