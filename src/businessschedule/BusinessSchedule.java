@@ -1,34 +1,10 @@
 package businessschedule;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import businessschedule.apresentacao.FrmHome;
+import businessschedule.apresentacao.FrmLogin;
 
-import businessschedule.modelo.classes.Escala;
-import java.util.Scanner;
-import businessschedule.modelo.dao.AdministradorDAO;
-import businessschedule.modelo.classes.Funcionario;
-import businessschedule.modelo.classes.Usuario;
-import businessschedule.modelo.classes.FuncionarioHorario;
-import businessschedule.modelo.classes.Programa;
-import businessschedule.modelo.classes.Switcher;
-import businessschedule.modelo.classes.Estudio;
-//import classes.dao.EscalaDAO;
-//import classes.dao.ProgramaDAO;
-import businessschedule.modelo.dao.SwitcherDAO;
-import businessschedule.modelo.dao.EstudioDAO;
-import businessschedule.modelo.dao.FuncionarioDAO;
-//import classes.dao.FuncionarioHorarioDAO;
-
-/**
- *
- * @author moura
- */
 public class BusinessSchedule {
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         /*FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         //Funcionario funcionario = new Funcionario(4, "Fulano de Tal", "fulano@teste.com", "fulano", "Op Camera");
