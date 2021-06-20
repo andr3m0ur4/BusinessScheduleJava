@@ -160,9 +160,9 @@ public class FrmMenuCadastro extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO add your handling code here:
-            /* EdicaoAdministrador ini = new EdicaoAdministrador();
+            FrmCadastroAdministrador ini = new FrmCadastroAdministrador();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
