@@ -165,6 +165,15 @@ public class FrmMenuCadastro extends JFrame {
             setVisible(false);
         }
     }
+    
+    private class FuncionarioListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FrmCadastroFuncionario ini = new FrmCadastroFuncionario();
+            ini.setVisible(true);
+            setVisible(false);
+        }
+    }
 
     private class EstudioListener implements ActionListener {
         @Override
@@ -206,15 +215,6 @@ public class FrmMenuCadastro extends JFrame {
         }
     }
 
-    private class FuncionarioListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoFuncionario ini = new EdicaoFuncionario();
-            ini.setVisible(true);
-            setVisible(false); */
-        }
-    }
 
     private class SwitcherListener implements ActionListener {
         @Override
