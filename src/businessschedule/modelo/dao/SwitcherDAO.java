@@ -52,11 +52,13 @@ public class SwitcherDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-            switcher = new Switcher(
+            if (rs.next()) {
+                switcher = new Switcher(
                     rs.getInt("id"), rs.getString("nome")
-            );
+                );
+            
+            }
             
             rs.close();
             stmt.close();

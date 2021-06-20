@@ -70,9 +70,9 @@ public class EscalaDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-            Funcionario funcionario = new Funcionario(
+            if (rs.next()) {
+                Funcionario funcionario = new Funcionario(
                         rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
                 );
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
@@ -81,7 +81,7 @@ public class EscalaDAO {
                 escala = new Escala(
                         rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario, funcionario
                 );
-
+            }
             
             rs.close();
             stmt.close();

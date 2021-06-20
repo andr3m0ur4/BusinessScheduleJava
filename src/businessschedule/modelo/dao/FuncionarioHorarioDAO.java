@@ -54,11 +54,12 @@ public class FuncionarioHorarioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-            funcionarioHorario = new FuncionarioHorario(
+            if (rs.next()) {
+                funcionarioHorario = new FuncionarioHorario(
                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
-            );
+                );
+            }
             
             rs.close();
             stmt.close();

@@ -50,12 +50,13 @@ public class FuncionarioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-            funcionario = new Funcionario(
+            if (rs.next()) {
+                funcionario = new Funcionario(
                     rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
-            );
-            
+                );
+            }
+               
             rs.close();
             stmt.close();
         } catch (SQLException erro) {
@@ -150,17 +151,18 @@ public class FuncionarioDAO {
         
        public Funcionario buscarNomeFuncionario(String nome) {
         Funcionario funcionario = null;
-        String sql = "SELECT * FROM funcionario WHERE nome = ?";
+        String sql = "SELECT * FROM funcionario LIKE nome = ?";
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setString(1, '%' + nome + '%');
             rs = stmt.executeQuery();
-            rs.next();
             
-            funcionario = new Funcionario(
+            if (rs.next()) {
+                funcionario = new Funcionario(
                     rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
-            );
+                );
+            }
             
             rs.close();
             stmt.close();

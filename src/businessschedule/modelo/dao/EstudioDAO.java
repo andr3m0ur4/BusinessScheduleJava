@@ -51,12 +51,11 @@ public class EstudioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
-            
-            estudio = new Estudio(
+            if (rs.next()) {
+                estudio = new Estudio(
                     rs.getInt("id"), rs.getString("nome")
-            );
-            
+                );
+            }
             rs.close();
             stmt.close();
         } catch (SQLException erro) {

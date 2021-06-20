@@ -153,17 +153,18 @@ public class AdministradorDAO {
     
         public Administrador buscarNome(String nome) {
         Administrador administrador = null;
-        String sql = "SELECT * FROM administrador WHERE nome = ?";
+        String sql = "SELECT * FROM administrador LIKE nome = ?";
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setString(1, '%' + nome + '%');
             rs = stmt.executeQuery();
-            rs.next();
             
-            administrador = new Administrador(
+            if (rs.next()) {
+                administrador = new Administrador(
                     rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
-            );
+                );
+            }
             
             rs.close();
             stmt.close();

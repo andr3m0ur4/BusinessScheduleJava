@@ -72,9 +72,9 @@ public class ProgramaDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            rs.next();
             
-             Switcher switcher = new Switcher(
+            if (rs.next()) {
+                Switcher switcher = new Switcher(
                         rs.getInt("id_switcher"), rs.getString("nome_switcher")
                 );
                 Estudio estudio = new Estudio(
@@ -83,6 +83,8 @@ public class ProgramaDAO {
                  programa = new Programa(
                         rs.getInt("id"), rs.getString("nome"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("tipo"), rs.getString("data"), switcher, estudio
                 );
+                 
+            }
             
             rs.close();
             stmt.close();
