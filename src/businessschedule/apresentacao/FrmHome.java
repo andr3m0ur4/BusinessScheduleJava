@@ -135,9 +135,9 @@ public class FrmHome extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO add your handling code here:
-            /* OpCadastro ini = new OpCadastro();
+            FrmMenuCadastro ini = new FrmMenuCadastro();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
 
     }
