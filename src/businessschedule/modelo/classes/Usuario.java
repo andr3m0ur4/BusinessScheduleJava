@@ -1,6 +1,6 @@
 package businessschedule.modelo.classes;
 
-import lib.Execoes;
+import lib.Excecoes;
 
 public class Usuario {
     private int id;
@@ -32,7 +32,7 @@ public class Usuario {
     }
 
     public void setId(int id) {
-        Execoes.menorQueZero("Id", id);
+        Excecoes.menorQueZero("Id", id);
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        Execoes.isNulo("Nome", nome);
+        Excecoes.isNulo("Nome", nome);
         this.nome = nome;
 
     }
@@ -53,7 +53,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        Execoes.isNulo("Email", email);
+        Excecoes.isNulo("Email", email);
         this.email = email;
     }
 
@@ -62,8 +62,8 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        Execoes.isNulo("Senha", senha);
-        Execoes.verificaTamanho("Senha", senha);
+        Excecoes.isNulo("Senha", senha);
+        Excecoes.verificaTamanho("Senha", senha);
         
         this.senha = senha;
     }
@@ -73,7 +73,7 @@ public class Usuario {
     }
 
     public void setFuncao(String funcao) {
-        Execoes.isNulo("Funçao", funcao);
+        Excecoes.isNulo("Funçao", funcao);
         this.funcao = funcao;
     }
     

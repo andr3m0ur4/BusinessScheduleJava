@@ -1,6 +1,6 @@
 package businessschedule.modelo.classes;
 
-import lib.Execoes;
+import lib.Excecoes;
 
 public class Switcher {
     private int id;
@@ -19,7 +19,7 @@ public class Switcher {
     }
 
     public void setId(int id) {
-        Execoes.menorQueZero("Id", id);
+        Excecoes.menorQueZero("Id", id);
         this.id = id;
     }
 
@@ -28,7 +28,7 @@ public class Switcher {
     }
 
     public void setNome(String nome) {
-        Execoes.isNulo("Nome", nome);
+        Excecoes.isNulo("Nome", nome);
         this.nome = nome;
     }
 

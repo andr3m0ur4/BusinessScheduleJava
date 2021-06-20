@@ -1,6 +1,6 @@
 package lib;
 
-public class Execoes {
+public class Excecoes {
     
      public static void isNulo ( String atributo, String valor ) {
 

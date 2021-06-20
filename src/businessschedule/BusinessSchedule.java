@@ -77,9 +77,12 @@ public class BusinessSchedule {
         }*/
         
         
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        /*AdministradorDAO funcionarioDAO = new AdministradorDAO();
         
-        funcionarioDAO.buscarNomeFuncionario("andre");
+        System.out.println(funcionarioDAO.buscarNome("andre"));*/
+        
+        AdministradorDAO dao = new AdministradorDAO();
+        System.out.println(dao.buscar(2));
 
     }
 }
