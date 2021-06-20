@@ -146,9 +146,9 @@ public class FrmHome extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO add your handling code here:
-            /* OpEdicao ini = new OpEdicao();
+            FrmMenuEdicao ini = new FrmMenuEdicao();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
