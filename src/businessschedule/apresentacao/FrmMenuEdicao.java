@@ -164,9 +164,9 @@ public class FrmMenuEdicao extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO add your handling code here:
-            /* EdicaoAdministrador ini = new EdicaoAdministrador();
+            FrmEdicaoAdministrador ini = new FrmEdicaoAdministrador();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 

@@ -241,14 +241,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
+            /*FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
             FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
+            dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
             );
             dao.inserir(funcionarioHorario);
-
+            
             JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
+            limpar();*/
         }
     }
 }

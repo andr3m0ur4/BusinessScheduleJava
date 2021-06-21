@@ -151,7 +151,7 @@ public class AdministradorDAO {
 
     }
     
-        public Administrador buscarNome(String nome) {
+    public Administrador buscarNome(String nome) {
         Administrador administrador = null;
         String sql = "SELECT * FROM administrador LIKE nome = ?";
         
@@ -173,6 +173,33 @@ public class AdministradorDAO {
         }
         
         return administrador;
+    }
+
+    public ResultSet carregarGrade() {
+        String sql = "SELECT id, nome, email, funcao FROM administrador";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public ResultSet pesquisarPor(String valor) {
+        String sql = "SELECT id, nome, email, funcao FROM administrador WHERE nome LIKE ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + valor + '%');
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
     }
     
 }
