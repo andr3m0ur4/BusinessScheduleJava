@@ -118,7 +118,7 @@ public class FrmEdicaoEscala extends JFrame {
         table.setModel(new ModeloGrade(
                 new EscalaDAO().carregarGrade(),
                 new String[] {
-                    "Código", "Data Inicio", "Data Final", "Ano", "Haririo", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                    "Código", "Data Inicio", "Data Final", "Ano", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
                 }
         ));
         table.addMouseListener(new TableMouseListener());
@@ -282,7 +282,7 @@ public class FrmEdicaoEscala extends JFrame {
         table.setModel(new ModeloGrade(
             new EscalaDAO().pesquisarPor(valor),
             new String[] {
-                       "Código", "Data Inicio", "Data Final", "Ano", "Haririo", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                       "Código", "Data Inicio", "Data Final", "Ano", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
             }
         ));
     }

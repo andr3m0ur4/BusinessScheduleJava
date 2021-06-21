@@ -168,13 +168,13 @@ public class EscalaDAO {
     }
 
     public ResultSet pesquisarPor(String valor) {
-        String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
+        String sql = "SELECT  e.id, e.data_inicio, e.data_fim, e.ano, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
                     "INNER JOIN funcionarioHorario as fh\n" +
                     "on e.id_funcionario_horario = fh.id\n" +
                     "INNER JOIN funcionario AS f\n" +
                     "ON fh.id_funcionario = f.id\n" + 
-                    "WHERE e.nome LIKE ?";
+                    "WHERE f.nome LIKE ?";
 
         try {
             stmt = con.prepareStatement(sql);
