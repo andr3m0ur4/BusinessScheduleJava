@@ -112,7 +112,7 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
         table.setModel(new ModeloGrade(
                 new FuncionarioHorarioDAO().carregarGrade(),
                 new String[] {
-                    "Código", "Data Inicio", "Data Final", "Ano", "Haririo", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                    "Código", "Horario Inicio", "Horario Final", "Data", "Funcionario", "Email", "Função"
                 }
         ));
         table.addMouseListener(new TableMouseListener());
@@ -268,7 +268,7 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
         table.setModel(new ModeloGrade(
             new FuncionarioHorarioDAO().pesquisarPor(valor),
             new String[] {
-                       "Código", "Data Inicio", "Data Final", "Ano", "Haririo", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                     "Código", "Horario Inicio", "Horario Final", "Data", "Funcionario", "Email", "Função"
             }
         ));
     }
