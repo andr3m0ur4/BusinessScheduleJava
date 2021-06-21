@@ -248,7 +248,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
             dao.inserir(funcionarioHorario);*/
 
             JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();*/
+            limpar();
         }
     }
 }
