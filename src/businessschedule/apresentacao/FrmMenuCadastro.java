@@ -220,9 +220,9 @@ public class FrmMenuCadastro extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            /* EdicaoPrograma ini = new EdicaoPrograma();
+            FrmCadastroPrograma ini = new FrmCadastroPrograma();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
