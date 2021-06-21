@@ -25,10 +25,10 @@ public class EscalaDAO {
         List<Escala> escalas = new ArrayList<>();
         String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
-                    "INNER JOIN funcionario AS f\n" +
-                    "ON e.id_funcionario = f.id\n" +
                     "INNER JOIN funcionarioHorario as fh\n" +
-                    "on e.id_funcionario_horario = fh.id";
+                    "on e.id_funcionario_horario = fh.id\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON fh.id_funcionario = f.id";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -39,10 +39,10 @@ public class EscalaDAO {
                         rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
                 );
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
+                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
                 );
                 Escala escala = new Escala(
-                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario, funcionario
+                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario
                 );
                 escalas.add(escala);
             }
@@ -60,10 +60,10 @@ public class EscalaDAO {
         Escala escala = null;
         String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
-                    "INNER JOIN funcionario AS f\n" +
-                    "ON e.id_funcionario = f.id\n" +
                     "INNER JOIN funcionarioHorario as fh\n" +
-                    "on e.id_funcionario_horario = fh.id\n" + 
+                    "on e.id_funcionario_horario = fh.id\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON fh.id_funcionario = f.id\n" + 
                     " WHERE e.id = ?";
         
         try {
@@ -76,10 +76,10 @@ public class EscalaDAO {
                         rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
                 );
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
+                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
                 );
                 escala = new Escala(
-                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario, funcionario
+                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario
                 );
             }
             
@@ -93,7 +93,7 @@ public class EscalaDAO {
     }
     
     public void inserir(Escala escala) {
-        String sql = "INSERT INTO escala VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO escala VALUES(?, ?, ?, ?, ?)";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -102,7 +102,6 @@ public class EscalaDAO {
             stmt.setString(3, DataHora.personalizarData(escala.getDataFim()));
             stmt.setString(4, escala.getAno());
             stmt.setInt(5, escala.getFuncionarioHorario().getId());
-            stmt.setInt(6, escala.getUsuario().getId());
             
             stmt.execute();
             stmt.close();
@@ -112,16 +111,14 @@ public class EscalaDAO {
     }
     
     public void alterar(Escala escala) {
-        String sql = "UPDATE escala SET nome = ?, senha = ?, funcao = ? WHERE id = ?";
+        String sql = "UPDATE escala SET data_inicio = ?, data_fim = ?, ano = ? WHERE id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, DataHora.personalizarData(escala.getDataInicio()));
             stmt.setString(2, DataHora.personalizarData(escala.getDataFim()));
             stmt.setString(3, escala.getAno());
-            stmt.setInt(4, escala.getFuncionarioHorario().getId());
-            stmt.setInt(5, escala.getUsuario().getId());
-            stmt.setInt(6, escala.getId());
+            stmt.setInt(4, escala.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException erro) {
@@ -158,4 +155,3 @@ public class EscalaDAO {
         return id + 1;
     }
 }
-

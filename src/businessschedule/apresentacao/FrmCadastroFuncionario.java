@@ -38,7 +38,7 @@ public class FrmCadastroFuncionario extends JFrame {
     private JTextField txtSenha;
 
     public FrmCadastroFuncionario() {
-        super("Business Schedule - Cadastrar Funcionario");
+        super("Business Schedule - Cadastrar Funcionário");
         initComponents();
     }
 

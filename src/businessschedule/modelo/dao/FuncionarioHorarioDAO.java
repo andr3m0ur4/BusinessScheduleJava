@@ -1,5 +1,6 @@
 package businessschedule.modelo.dao;
 
+import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.FuncionarioHorario;
 import businessschedule.util.Conexao;
 import lib.DataHora;
@@ -24,15 +25,19 @@ public class FuncionarioHorarioDAO {
     
     public List<FuncionarioHorario> listar() {
         List<FuncionarioHorario> funcionarioHorarios = new ArrayList<>();
-        String sql = "SELECT * FROM funcionarioHorario";
+        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\n" +
+                "FROM funcionarioHorario AS fh\n" +
+                "INNER JOIN funcionario AS f\n" +
+                "ON fh.id_funcionario = f.id";
         
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
+                Funcionario funcionario = new Funcionario(rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao"));
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
+                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
                 );
                 funcionarioHorarios.add(funcionarioHorario);
             }
@@ -48,7 +53,11 @@ public class FuncionarioHorarioDAO {
     
     public FuncionarioHorario buscar(int id) {
         FuncionarioHorario funcionarioHorario = null;
-        String sql = "SELECT * FROM funcionarioHorario WHERE id = ?";
+        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
+"            \"FROM funcionarioHorario AS fh\\n\" +\n" +
+"            \"INNER JOIN funcionario AS f\\n\" +\n" +
+"            \"ON fh.id_funcionario = f.id\\n\" + \n" +
+             "WHERE fh.id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -56,8 +65,9 @@ public class FuncionarioHorarioDAO {
             rs = stmt.executeQuery();
             
             if (rs.next()) {
+                Funcionario funcionario = new Funcionario(rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao"));
                 funcionarioHorario = new FuncionarioHorario(
-                       rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data")
+                       rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
                 );
             }
             
@@ -71,7 +81,7 @@ public class FuncionarioHorarioDAO {
     }
     
     public void inserir(FuncionarioHorario funcionarioHorario) {
-        String sql = "INSERT INTO funcionarioHorario VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO funcionarioHorario VALUES(?, ?, ?, ?, ?)";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -79,6 +89,7 @@ public class FuncionarioHorarioDAO {
             stmt.setString(2, DataHora.personalizarHora(funcionarioHorario.getHorarioInicio()));
             stmt.setString(3, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
             stmt.setString(4, DataHora.personalizarData(funcionarioHorario.getData()));
+            stmt.setInt(5, funcionarioHorario.getUsuario().getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException erro) {
@@ -87,7 +98,7 @@ public class FuncionarioHorarioDAO {
     }
     
     public void alterar(FuncionarioHorario funcionarioHorario) {
-        String sql = "UPDATE funcionarioHorario SET  horario_inicio = ?, horario_fim = ?, data = ? WHERE id = ?";
+        String sql = "UPDATE funcionarioHorario SET horario_inicio = ?, horario_fim = ?, data = ? WHERE id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
