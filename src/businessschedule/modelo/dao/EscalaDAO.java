@@ -148,12 +148,8 @@ public class EscalaDAO {
         
         return id + 1;
     }
-<<<<<<< HEAD
     
     
-=======
-
->>>>>>> 7a4b1503836290c05889a18b0518444a60280993
     public ResultSet carregarGrade() {
         String sql = "SELECT e.id, e.data_inicio, e.data_fim, e.ano, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
