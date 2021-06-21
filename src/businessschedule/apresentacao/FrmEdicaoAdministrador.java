@@ -1,9 +1,7 @@
 package businessschedule.apresentacao;
 
 import businessschedule.modelo.classes.Administrador;
-import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.dao.AdministradorDAO;
-import businessschedule.modelo.dao.FuncionarioDAO;
 
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
@@ -26,11 +24,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.MouseInputListener;
-
-import org.w3c.dom.events.MouseEvent;
 
 public class FrmEdicaoAdministrador extends JFrame {
     private JButton btnHome;
