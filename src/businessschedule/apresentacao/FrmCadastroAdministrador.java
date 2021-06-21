@@ -272,6 +272,7 @@ public class FrmCadastroAdministrador extends JFrame {
                     dao.lastId(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
                 );
                 dao.inserir(administrador);
+                dao.close();
 
                 JOptionPane.showMessageDialog(null, "Administrador cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();

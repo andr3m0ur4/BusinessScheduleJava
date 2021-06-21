@@ -47,8 +47,6 @@ public class EscalaDAO {
                 escalas.add(escala);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -83,8 +81,6 @@ public class EscalaDAO {
                 );
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -104,7 +100,6 @@ public class EscalaDAO {
             stmt.setInt(5, escala.getFuncionarioHorario().getId());
             
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -120,7 +115,6 @@ public class EscalaDAO {
             stmt.setString(3, escala.getAno());
             stmt.setInt(4, escala.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -153,5 +147,15 @@ public class EscalaDAO {
         }
         
         return id + 1;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
 }

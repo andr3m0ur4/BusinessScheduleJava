@@ -41,8 +41,6 @@ public class FuncionarioHorarioDAO {
                 funcionarioHorarios.add(funcionarioHorario);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -53,10 +51,10 @@ public class FuncionarioHorarioDAO {
     public FuncionarioHorario buscar(int id) {
         FuncionarioHorario funcionarioHorario = null;
         String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
-"            \"FROM funcionarioHorario AS fh\\n\" +\n" +
-"            \"INNER JOIN funcionario AS f\\n\" +\n" +
-"            \"ON fh.id_funcionario = f.id\\n\" + \n" +
-             "WHERE fh.id = ?";
+            "\"FROM funcionarioHorario AS fh\\n\" +\n" +
+            "\"INNER JOIN funcionario AS f\\n\" +\n" +
+            "\"ON fh.id_funcionario = f.id\\n\" + \n" +
+            "WHERE fh.id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -70,8 +68,6 @@ public class FuncionarioHorarioDAO {
                 );
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -90,7 +86,6 @@ public class FuncionarioHorarioDAO {
             stmt.setString(4, DataHora.personalizarData(funcionarioHorario.getData()));
             stmt.setInt(5, funcionarioHorario.getUsuario().getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -106,7 +101,6 @@ public class FuncionarioHorarioDAO {
             stmt.setString(3, DataHora.personalizarData(funcionarioHorario.getData()));
             stmt.setInt(4, funcionarioHorario.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -139,5 +133,15 @@ public class FuncionarioHorarioDAO {
         }
         
         return id + 1;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
 }

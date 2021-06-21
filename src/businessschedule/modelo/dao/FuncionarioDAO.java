@@ -33,8 +33,6 @@ public class FuncionarioDAO {
                 funcionarios.add(funcionario);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -56,9 +54,7 @@ public class FuncionarioDAO {
                     rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getString("funcao")
                 );
             }
-               
-            rs.close();
-            stmt.close();
+
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -77,7 +73,6 @@ public class FuncionarioDAO {
             stmt.setString(4, funcionario.getSenha());
             stmt.setString(5, funcionario.getFuncao());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -93,7 +88,6 @@ public class FuncionarioDAO {
             stmt.setString(3, funcionario.getFuncao());
             stmt.setInt(4, funcionario.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -128,7 +122,7 @@ public class FuncionarioDAO {
         return id + 1;
     }
     
-        public boolean login(String email ,String senha){
+    public boolean login(String email ,String senha) {
          
         boolean validacao = false;
         String sql = "SELECT * FROM funcionario WHERE email = ? AND senha = ?";
@@ -145,11 +139,11 @@ public class FuncionarioDAO {
             erro.printStackTrace();
         }
         
-         return false;
+        return false;
          
     }
         
-       public Funcionario buscarNomeFuncionario(String nome) {
+    public Funcionario buscarNomeFuncionario(String nome) {
         Funcionario funcionario = null;
         String sql = "SELECT * FROM funcionario LIKE nome = ?";
         
@@ -164,12 +158,20 @@ public class FuncionarioDAO {
                 );
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
         
         return funcionario;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
 }

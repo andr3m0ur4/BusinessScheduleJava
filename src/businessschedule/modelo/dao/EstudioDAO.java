@@ -34,8 +34,6 @@ public class EstudioDAO {
                 estudios.add(estudio);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -51,13 +49,13 @@ public class EstudioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
+            
             if (rs.next()) {
                 estudio = new Estudio(
                     rs.getInt("id"), rs.getString("nome")
                 );
             }
-            rs.close();
-            stmt.close();
+            
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -73,7 +71,6 @@ public class EstudioDAO {
             stmt.setInt(1, estudio.getId());
             stmt.setString(2, estudio.getNome());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -87,7 +84,6 @@ public class EstudioDAO {
             stmt.setString(1, estudio.getNome());
             stmt.setInt(2, estudio.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -120,5 +116,15 @@ public class EstudioDAO {
         }
         
         return id + 1;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
 }
