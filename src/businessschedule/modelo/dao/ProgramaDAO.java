@@ -24,13 +24,12 @@ public class ProgramaDAO {
     
     public List<Programa> listar() {
         List<Programa> programas = new ArrayList<>();      
-             String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
-                    "FROM programa AS p\n" +
-                    "INNER JOIN switcher AS s\n" +
-                    "ON p.id_switcher = s.id\n" +
-                    "INNER JOIN estudio AS es\n" +
-                    "ON p.id_estudio = es.id";
-        
+        String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
+            "FROM programa AS p\n" +
+            "INNER JOIN switcher AS s\n" +
+            "ON p.id_switcher = s.id\n" +
+            "INNER JOIN estudio AS es\n" +
+            "ON p.id_estudio = es.id";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -49,8 +48,6 @@ public class ProgramaDAO {
                 programas.add(programa);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -60,13 +57,13 @@ public class ProgramaDAO {
     
     public Programa buscar(int id) {
         Programa programa = null;
-           String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
-                    "FROM programa AS p\n" +
-                    "INNER JOIN switcher AS s\n" +
-                    "ON p.id_switcher = s.id\n" +
-                    "INNER JOIN estudio AS es\n" +
-                    "ON p.id_estudio = es.id\n" +
-                    "WHERE p.id = ?";
+        String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
+                "FROM programa AS p\n" +
+                "INNER JOIN switcher AS s\n" +
+                "ON p.id_switcher = s.id\n" +
+                "INNER JOIN estudio AS es\n" +
+                "ON p.id_estudio = es.id\n" +
+                "WHERE p.id = ?";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -86,8 +83,6 @@ public class ProgramaDAO {
                  
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -109,13 +104,12 @@ public class ProgramaDAO {
             stmt.setInt(7, programa.getSwitcher().getId());
             stmt.setInt(8, programa.getEstudio().getId()); 
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
     }
     
-   public void alterar(Programa programa) {
+    public void alterar(Programa programa) {
         String sql = "UPDATE programa SET nome = ?, horario_inicio = ?, horario_fim = ?, tipo = ?, data = ?, switcher = ?, estudio = ? WHERE id = ?";
 
         try {
@@ -129,7 +123,6 @@ public class ProgramaDAO {
             stmt.setInt(7, programa.getEstudio().getId());
             stmt.setInt(8, programa.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -163,6 +156,14 @@ public class ProgramaDAO {
         
         return id + 1;
     }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+    }
 }
-
-

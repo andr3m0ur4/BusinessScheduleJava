@@ -33,8 +33,6 @@ public class AdministradorDAO {
                 administradores.add(administrador);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -57,8 +55,6 @@ public class AdministradorDAO {
                 );
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -77,7 +73,6 @@ public class AdministradorDAO {
             stmt.setString(4, administrador.getSenha());
             stmt.setString(5, administrador.getFuncao());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -93,7 +88,6 @@ public class AdministradorDAO {
             stmt.setString(3, administrador.getFuncao());
             stmt.setInt(4, administrador.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -141,7 +135,6 @@ public class AdministradorDAO {
             rs = stmt.executeQuery();
             validacao = rs.next();
             return validacao;
-       
 
         } catch (SQLException erro) {
             erro.printStackTrace();
@@ -166,8 +159,6 @@ public class AdministradorDAO {
                 );
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -200,6 +191,16 @@ public class AdministradorDAO {
         }
 
         return rs;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
     
 }

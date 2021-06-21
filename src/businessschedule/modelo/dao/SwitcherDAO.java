@@ -35,8 +35,6 @@ public class SwitcherDAO {
                 switchers.add(switcher);
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -60,8 +58,6 @@ public class SwitcherDAO {
             
             }
             
-            rs.close();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -77,7 +73,6 @@ public class SwitcherDAO {
             stmt.setInt(1, switcher.getId());
             stmt.setString(2, switcher.getNome());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -91,7 +86,6 @@ public class SwitcherDAO {
             stmt.setString(1, switcher.getNome());
             stmt.setInt(2, switcher.getId());
             stmt.execute();
-            stmt.close();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -124,6 +118,16 @@ public class SwitcherDAO {
         }
         
         return id + 1;
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
     
         public ResultSet carregarGrade() {
