@@ -154,6 +154,14 @@ public class FrmCadastroEstudio extends JFrame {
         txtNome.setText("");
         btnCadastro.setEnabled(true);
     }
+    
+    public boolean verificarCampos() {
+        if (txtNome.getText().equals("")){
+            return false;
+        }
+
+        return true;
+    }
 
     private class SairListener implements ActionListener {
         @Override
@@ -207,14 +215,18 @@ public class FrmCadastroEstudio extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            EstudioDAO dao = new EstudioDAO();
-            Estudio estudio = new Estudio(
-                dao.lastId(), txtNome.getText()
-            );
-            dao.inserir(estudio);
+            if(verificarCampos()){
+                EstudioDAO dao = new EstudioDAO();
+                Estudio estudio = new Estudio(
+                     dao.lastId(), txtNome.getText()
+                );
+                dao.inserir(estudio);
 
-            JOptionPane.showMessageDialog(null, "Estudio cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
+                JOptionPane.showMessageDialog(null, "Estudio cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
+            }else{
+                  JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

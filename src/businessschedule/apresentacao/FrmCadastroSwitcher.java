@@ -154,6 +154,14 @@ public class FrmCadastroSwitcher extends JFrame {
         txtNome.setText("");
         btnCadastro.setEnabled(true);
     }
+    
+    public boolean verificarCampos() {
+        if (txtNome.getText().equals("")){
+            return false;
+        }
+
+        return true;
+    }
 
     private class SairListener implements ActionListener {
         @Override
@@ -207,6 +215,7 @@ public class FrmCadastroSwitcher extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
+            if(verificarCampos()){
             SwitcherDAO dao = new SwitcherDAO();
             Switcher switcher = new Switcher(
                 dao.lastId(), txtNome.getText()
@@ -215,6 +224,9 @@ public class FrmCadastroSwitcher extends JFrame {
 
             JOptionPane.showMessageDialog(null, "Switcher cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();
+            }else{
+                  JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

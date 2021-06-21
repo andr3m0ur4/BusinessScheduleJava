@@ -11,15 +11,15 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-import businessschedule.modelo.classes.FuncionarioHorario;
-import businessschedule.modelo.dao.FuncionarioHorarioDAO;
+import businessschedule.modelo.classes.Programa;
+import businessschedule.modelo.dao.ProgramaDAO;
 
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FrmCadastroFuncionarioHorario extends JFrame {
+public class FrmCadastroPrograma extends JFrame {
     private JButton btnCadastro;
     private JButton btnEdicao;
     private JButton btnHome;
@@ -31,12 +31,17 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel7;
+    private JTextField txtNome;
     private JTextField txtHoraInicial;
     private JTextField txtHoraFinal;
+    private JTextField txtTipo;
     private JTextField txtData;
+    
 
-    public FrmCadastroFuncionarioHorario() {
-        super("Business Schedule - Cadastrar um Horario");
+    public FrmCadastroPrograma() {
+        super("Business Schedule - Cadastrar Programa");
         initComponents();
     }
 
@@ -49,8 +54,12 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel3 = new JLabel();
         jLabel4 = new JLabel();
         jLabel5 = new JLabel();
+        jLabel6 = new JLabel();
+        jLabel7 = new JLabel();
+        txtNome = new JTextField();
         txtHoraInicial = new JTextField();
         txtHoraFinal = new JTextField();
+        txtTipo = new JTextField();
         txtData = new JTextField();
         btnSalvar = new JButton();
         btnLimpar = new JButton();
@@ -68,17 +77,22 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Cadastre um Horario");
+        jLabel2.setText("Cadastre um Programa");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
-        jLabel3.setText("Hora Incial:");
+        jLabel3.setText("Nome:");
 
         jLabel4.setFont(new Font("Segoe UI", 0, 18));
-        jLabel4.setText("Hora Final:");
+        jLabel4.setText("Hora Incial:");
 
         jLabel5.setFont(new Font("Segoe UI", 0, 18));
-        jLabel5.setText("Data:");
+        jLabel5.setText("Hora Final:");
 
+        jLabel6.setFont(new Font("Segoe UI", 0, 18));
+        jLabel6.setText("Tipo:");
+        
+        jLabel7.setFont(new Font("Segoe UI", 0, 18));
+        jLabel7.setText("Data:");
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new SalvarListener());
@@ -91,81 +105,102 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
 
         btnEdicao.setText("Menu de Edição");
         btnEdicao.addActionListener(new MenuEdicaoListener());
+        
 
         GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(txtData))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(txtHoraInicial))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jLabel2)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addGap(192, 192, 192)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCadastro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel5)
+                    .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -185,7 +220,9 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private void limpar() {
         txtHoraInicial.setText("");
         txtHoraFinal.setText("");
+        txtNome.setText("");
         txtData.setText("");
+        txtTipo.setText("");
         btnCadastro.setEnabled(true);
     }
 
@@ -241,13 +278,13 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
-            /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
+            ProgramaDAO dao = new ProgramaDAO();
+           /* Programa programa = new Programa(
+                dao.lastId(), txtNome.getText(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtTipo.getText(), txtData.getText()
             );
-            dao.inserir(funcionarioHorario);*/
+            dao.inserir(programa);*/
 
-            JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Programa cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();
         }
     }
