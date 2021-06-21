@@ -205,6 +205,14 @@ public class FrmCadastroAdministrador extends JFrame {
         btnCadastro.setEnabled(true);
     }
 
+    public boolean verificarCampos() {
+        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtSenha.getText().equals("") || txtFuncao.getText().equals("")) {
+            return false;
+        }
+
+        return true;
+    }
+
     private class SairListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -257,14 +265,18 @@ public class FrmCadastroAdministrador extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            AdministradorDAO dao = new AdministradorDAO();
-            Administrador administrador = new Administrador(
-                dao.lastId(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
-            );
-            dao.inserir(administrador);
+            if (verificarCampos()) {
+                AdministradorDAO dao = new AdministradorDAO();
+                Administrador administrador = new Administrador(
+                    dao.lastId(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
+                );
+                dao.inserir(administrador);
 
-            JOptionPane.showMessageDialog(null, "Administrador cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
+                JOptionPane.showMessageDialog(null, "Administrador cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
