@@ -4,8 +4,13 @@ public class Excecoes {
     
     public static void isNulo(String atributo, String valor) {
 
-	if (valor == null || valor.isEmpty()) 
+        if (valor == null || valor.isEmpty()) 
             throw new IllegalArgumentException( atributo + " não pode ser nulo!");
+    }
+
+    public static void isNulo(String atributo, Object objeto) {
+        if (objeto == null) 
+            throw new IllegalArgumentException(atributo + " não pode ser nulo!");
     }
      
     public static void verificaTamanho(String atributo, String valor) {
@@ -16,8 +21,8 @@ public class Excecoes {
      
     public static void menorQueZero(String atributo, int valor) {
 
-	if ( valor <= 0 ) 
-            throw new IllegalArgumentException( atributo + " tem que ser maior que 0");		
+        if ( valor <= 0 )
+                throw new IllegalArgumentException( atributo + " tem que ser maior que 0");		
     }
     
 }
