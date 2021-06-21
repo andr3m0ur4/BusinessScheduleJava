@@ -21,6 +21,7 @@ public class FuncionarioHorario {
         setHorarioInicio(horarioInicio);
         setHorarioFim(horarioFim);
         setData(data);
+        setUsuario(usuario);
     }
 
     public int getId() {
@@ -73,6 +74,7 @@ public class FuncionarioHorario {
     }
 
     public void setUsuario(Usuario usuario) {
+        Excecoes.isNulo("Funcionário", usuario);
         this.usuario = usuario;
     }
 
