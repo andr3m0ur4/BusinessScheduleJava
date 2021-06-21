@@ -126,4 +126,31 @@ public class SwitcherDAO {
         return id + 1;
     }
     
+        public ResultSet carregarGrade() {
+        String sql = "SELECT id, nome funcao FROM switcher";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public ResultSet pesquisarPor(String valor) {
+        String sql = "SELECT id, nome funcao FROM switcher WHERE nome LIKE ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + valor + '%');
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+    
 }

@@ -73,7 +73,6 @@ public class FuncionarioHorario {
     }
 
     public void setUsuario(Usuario usuario) {
-        Excecoes.isNulo("Funcionário", usuario);
         this.usuario = usuario;
     }
 

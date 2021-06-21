@@ -1,7 +1,7 @@
 package businessschedule.apresentacao;
 
-import businessschedule.modelo.classes.Administrador;
-import businessschedule.modelo.dao.AdministradorDAO;
+import businessschedule.modelo.classes.Funcionario;
+import businessschedule.modelo.dao.FuncionarioDAO;
 
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
@@ -30,7 +30,7 @@ import javax.swing.event.MouseInputListener;
 
 import org.w3c.dom.events.MouseEvent;
 
-public class FrmEdicaoAdministrador extends JFrame {
+public class FrmEdicaoFuncionario extends JFrame {
     private JButton btnHome;
     private JButton btnLimpar;
     private JButton btnMenuCadastro;
@@ -53,8 +53,8 @@ public class FrmEdicaoAdministrador extends JFrame {
     private JTextField txtSenha;
     private int id;
 
-    public FrmEdicaoAdministrador() {
-        super("Business Schedule - Editar Administrador");
+    public FrmEdicaoFuncionario() {
+        super("Business Schedule - Editar Funcionario");
         initComponents();
     }
 
@@ -86,7 +86,7 @@ public class FrmEdicaoAdministrador extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Edite um Administrador");
+        jLabel2.setText("Edite um Funcionario");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
         jLabel3.setText("Nome:");
@@ -107,7 +107,7 @@ public class FrmEdicaoAdministrador extends JFrame {
         btnLimpar.addActionListener(new LimparListener());
 
         table.setModel(new ModeloGrade(
-                new AdministradorDAO().carregarGrade(),
+                new FuncionarioDAO().carregarGrade(),
                 new String[] {
                     "Código", "Nome", "Email", "Função"
                 }
@@ -271,7 +271,7 @@ public class FrmEdicaoAdministrador extends JFrame {
 
     private void pesquisar(String valor) {
         table.setModel(new ModeloGrade(
-            new AdministradorDAO().pesquisarPor(valor),
+            new FuncionarioDAO().pesquisarPor(valor),
             new String[] {
                 "Código", "Nome", "Email", "Função"
             }
@@ -348,11 +348,11 @@ public class FrmEdicaoAdministrador extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
-                AdministradorDAO dao = new AdministradorDAO();
-                Administrador administrador = new Administrador(
+                FuncionarioDAO dao = new FuncionarioDAO();
+                Funcionario funcionario = new Funcionario(
                     id, txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
                 );
-                dao.alterar(administrador);
+                dao.alterar(funcionario);
                 JOptionPane.showMessageDialog(null, "Administrador alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);

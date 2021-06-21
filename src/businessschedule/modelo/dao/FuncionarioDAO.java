@@ -172,4 +172,32 @@ public class FuncionarioDAO {
         
         return funcionario;
     }
+       
+           public ResultSet carregarGrade() {
+        String sql = "SELECT id, nome, email, funcao FROM funcionario";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public ResultSet pesquisarPor(String valor) {
+        String sql = "SELECT id, nome, email, funcao FROM funcionario WHERE nome LIKE ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + valor + '%');
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+    
 }
