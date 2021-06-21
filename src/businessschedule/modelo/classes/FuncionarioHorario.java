@@ -10,11 +10,12 @@ public class FuncionarioHorario {
     private String horarioInicio;
     private String horarioFim;
     private String data;
+    private Usuario usuario;
     
     public FuncionarioHorario() {
     }
     
-    public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data) {
+    public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data, Usuario usuario) {
         
         setId(id);
         setHorarioInicio(horarioInicio);
@@ -67,10 +68,17 @@ public class FuncionarioHorario {
         this.data = data;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        Excecoes.isNulo("Funcionário", usuario);
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "Id: " + id + " - Horario Inicio: " + horarioInicio + " - Horario Fim: " +
-                horarioFim + " - Data: " + data;
+        return "FuncionarioHorario{" + "id=" + id + ", horarioInicio=" + horarioInicio + ", horarioFim=" + horarioFim + ", data=" + data + ", usuario=" + usuario + '}';
     }
-    
 }

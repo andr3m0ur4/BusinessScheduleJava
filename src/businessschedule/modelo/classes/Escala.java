@@ -12,15 +12,13 @@ public class Escala {
     private String ano;
     
     FuncionarioHorario funcionarioHorario;
-    Usuario usuario;
     
-    public Escala(int id, String dataInicio, String dataFim, String ano, FuncionarioHorario funcionarioHorario, Usuario usuario) {
+    public Escala(int id, String dataInicio, String dataFim, String ano, FuncionarioHorario funcionarioHorario) {
         setId(id);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         setAno(ano);
         setFuncionarioHorario(funcionarioHorario);
-        setUsuario(usuario);
     }
 
     public int getId() {
@@ -73,24 +71,12 @@ public class Escala {
     }
 
     public void setFuncionarioHorario(FuncionarioHorario funcionarioHorario) {
+        Excecoes.isNulo("Funcionário Horário", funcionarioHorario);
         this.funcionarioHorario = funcionarioHorario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     @Override
     public String toString() {
-         return "ID: " + id + " - Ano: " + ano + " - Data de Inicio: " + dataInicio + " - Data de Fim: " 
-             + dataFim + " - Funcionario: " + usuario 
-                + " - Horario do Funcionario: " + funcionarioHorario ;
-        
+        return "Escala{" + "id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", ano=" + ano + ", funcionarioHorario=" + funcionarioHorario + '}';
     }
-    
-    
 }
