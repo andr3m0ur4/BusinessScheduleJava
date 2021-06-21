@@ -143,5 +143,18 @@ public class EstudioDAO {
         }
 
         return rs;
+<<<<<<< HEAD
+=======
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+>>>>>>> 7a4b1503836290c05889a18b0518444a60280993
     }
 }

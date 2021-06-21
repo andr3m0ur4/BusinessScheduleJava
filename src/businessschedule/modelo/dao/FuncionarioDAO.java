@@ -191,5 +191,15 @@ public class FuncionarioDAO {
 
         return rs;
     }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+    }
     
 }

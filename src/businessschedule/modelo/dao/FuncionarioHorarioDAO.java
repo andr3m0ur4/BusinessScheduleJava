@@ -152,11 +152,19 @@ public class FuncionarioHorarioDAO {
     }
 
     public ResultSet pesquisarPor(String valor) {
+<<<<<<< HEAD
         String sql = "SELECT fh.id, fh.horario_inicio, fh.horario_fim, fh.data, f.nome, f.email, f.funcao\n" +
 "            \"FROM funcionarioHorario AS fh\n" +
 "            \"INNER JOIN funcionario AS f\n" +
 "            \"ON fh.id_funcionario = f.id\n" +
              "WHERE f.nome LIKE = ?";
+=======
+        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
+                "\"FROM funcionarioHorario AS fh\\n\" +\n" +
+                "\"INNER JOIN funcionario AS f\\n\" +\n" +
+                "\"ON fh.id_funcionario = f.id\\n\" + \n" +
+                "WHERE f.nome LIKE = ?";
+>>>>>>> 7a4b1503836290c05889a18b0518444a60280993
 
         try {
             stmt = con.prepareStatement(sql);
@@ -167,5 +175,18 @@ public class FuncionarioHorarioDAO {
         }
 
         return rs;
+<<<<<<< HEAD
+=======
+    }
+
+    public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+>>>>>>> 7a4b1503836290c05889a18b0518444a60280993
     }
 }
