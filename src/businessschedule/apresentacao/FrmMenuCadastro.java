@@ -200,9 +200,19 @@ public class FrmMenuCadastro extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            /* EdicaoEsacala ini = new EdicaoEsacala();
+            FrmCadastroEscala ini = new FrmCadastroEscala();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
+        }
+    }
+    
+    private class HorarioFuncionarioListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+            FrmCadastroFuncionarioHorario ini = new FrmCadastroFuncionarioHorario();
+            ini.setVisible(true);
+            setVisible(false);
         }
     }
 
@@ -211,16 +221,6 @@ public class FrmMenuCadastro extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             /* EdicaoPrograma ini = new EdicaoPrograma();
-            ini.setVisible(true);
-            setVisible(false); */
-        }
-    }
-
-    private class HorarioFuncionarioListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoHorarioFuncionario ini = new EdicaoHorarioFuncionario();
             ini.setVisible(true);
             setVisible(false); */
         }
