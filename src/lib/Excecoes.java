@@ -8,11 +8,6 @@ public class Excecoes {
             throw new IllegalArgumentException( atributo + " não pode ser nulo!");
     }
      
-    public static void isNulo(String atributo, Object obj) {
-        if (obj == null) 
-            throw new IllegalArgumentException( atributo + " não pode ser nulo!");
-    }
-     
     public static void verificaTamanho(String atributo, String valor) {
 
         if ( valor.length() < 8 )

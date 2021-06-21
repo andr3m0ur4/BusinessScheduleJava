@@ -169,24 +169,44 @@ public class FrmMenuEdicao extends JFrame {
             setVisible(false);
         }
     }
+    
+    private class FuncionarioListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+         // TODO add your handling code here:
+            FrmEdicaoFuncionario ini = new FrmEdicaoFuncionario();
+            ini.setVisible(true);
+            setVisible(false);
+        }
+    }
 
+    private class SwitcherListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO add your handling code here:
+            FrmEdicaoSwitcher ini = new FrmEdicaoSwitcher();
+            ini.setVisible(true);
+            setVisible(false);
+        }
+    }
+        
     private class EstudioListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoEstudio ini = new EdicaoEstudio();
+            // TODO add your handling code here:
+            FrmEdicaoEstudio ini = new FrmEdicaoEstudio();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
     private class EscalaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoEsacala ini = new EdicaoEsacala();
+            // TODO add your handling code here:
+            FrmEdicaoEscala ini = new FrmEdicaoEscala();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
@@ -203,30 +223,10 @@ public class FrmMenuEdicao extends JFrame {
     private class HorarioFuncionarioListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoHorarioFuncionario ini = new EdicaoHorarioFuncionario();
+             // TODO add your handling code here:
+            FrmEdicaoFuncionarioHorario ini = new FrmEdicaoFuncionarioHorario();
             ini.setVisible(true);
-            setVisible(false); */
-        }
-    }
-
-    private class FuncionarioListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoFuncionario ini = new EdicaoFuncionario();
-            ini.setVisible(true);
-            setVisible(false); */
-        }
-    }
-
-    private class SwitcherListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoSwitcher ini = new EdicaoSwitcher();
-            ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 

@@ -71,7 +71,6 @@ public class Escala {
     }
 
     public void setFuncionarioHorario(FuncionarioHorario funcionarioHorario) {
-        Excecoes.isNulo("Funcionário Horário", funcionarioHorario);
         this.funcionarioHorario = funcionarioHorario;
     }
 

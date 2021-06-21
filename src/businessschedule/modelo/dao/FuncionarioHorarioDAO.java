@@ -135,6 +135,40 @@ public class FuncionarioHorarioDAO {
         return id + 1;
     }
 
+    public ResultSet carregarGrade() {
+        String sql = "SELECT fh.id, fh.horario_inicio, fh.horario_fim, fh.data, f.nome, f.email, f.funcao\\n\" +\n" +
+                "\"FROM funcionarioHorario AS fh\\n\" +\n" +
+                "\"INNER JOIN funcionario AS f\\n\" +\n" +
+                "\"ON fh.id_funcionario = f.id\\n\" + \n";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public ResultSet pesquisarPor(String valor) {
+        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
+                "\"FROM funcionarioHorario AS fh\\n\" +\n" +
+                "\"INNER JOIN funcionario AS f\\n\" +\n" +
+                "\"ON fh.id_funcionario = f.id\\n\" + \n" +
+                "WHERE f.nome LIKE = ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + valor + '%');
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public void close() {
         try {
             rs.close();
