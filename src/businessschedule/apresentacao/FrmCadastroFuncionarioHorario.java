@@ -188,6 +188,16 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         txtData.setText("");
         btnCadastro.setEnabled(true);
     }
+    
+    public boolean verificarCampos() {
+        if (txtData.getText().equals("") || txtHoraFinal.getText().equals("") || txtHoraInicial.getText().equals("")) {
+           // falta cb
+            
+            return false;
+        }
+
+        return true;
+    }
 
     private class SairListener implements ActionListener {
         @Override
@@ -241,6 +251,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
+            if(verificarCampos()){
             FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
             /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
                 dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
@@ -249,6 +260,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
 
             JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();
+            }
         }
     }
 }

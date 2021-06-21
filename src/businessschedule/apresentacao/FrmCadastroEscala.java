@@ -221,6 +221,16 @@ public class FrmCadastroEscala extends JFrame {
         btnCadastro.setEnabled(true);
     }
 
+       public boolean verificarCampos() {
+        if (txtDataFinal.getText().equals("") || txtDataInicial.getText().equals("") || txtAno.getText().equals("")) {
+           // falta cb
+            
+            return false;
+        }
+
+        return true;
+    }
+       
     private class SairListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -273,6 +283,7 @@ public class FrmCadastroEscala extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
+            if(verificarCampos()){
             EscalaDAO dao = new EscalaDAO();
            /* Escala escala = new Escala(
                 dao.lastId(), txtDataInicial.getText(), txtDataFinal.getText(), txtAno.getText(), cbHorario.
@@ -281,6 +292,7 @@ public class FrmCadastroEscala extends JFrame {
 
             JOptionPane.showMessageDialog(null, "Escala cadastrada com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();
+            }
         }
     }
 }
