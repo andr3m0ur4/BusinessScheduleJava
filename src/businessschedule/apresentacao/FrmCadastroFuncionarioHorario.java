@@ -42,7 +42,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private JLabel jLabel4;
     private JLabel jLabel5;
     private JLabel jLabel6;
-    private JComboBox<String> cbFuncionario;
+    private JComboBox<Funcionario> cbFuncionario;
     private JFormattedTextField txtHoraInicial;
     private JFormattedTextField txtHoraFinal;
     private JFormattedTextField txtData;
@@ -224,14 +224,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     }
 
     private void preencherComboBox() {
-        List<String> lista = new ArrayList<>();
+        List<Funcionario> lista = new ArrayList<>();
 
-        for (FuncionarioHorario funcionarioHorario : new FuncionarioHorarioDAO().listar()) {
-            lista.add(funcionarioHorario.getUsuario().getNome());
+        for (Funcionario funcionario : new FuncionarioDAO().listar()) {
+            lista.add(funcionario);
         }
 
-        String[] campos = lista.toArray(new String[lista.size()]);
-        cbFuncionario.setModel(new DefaultComboBoxModel<>(campos));
+        Funcionario[] funcionarios = lista.toArray(new Funcionario[lista.size()]);
+        cbFuncionario.setModel(new DefaultComboBoxModel<>(funcionarios));
     }
     
     public boolean verificarCampos() {
@@ -299,9 +299,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
-                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-                Funcionario funcionario = funcionarioDAO.buscar(cbFuncionario.getSelectedIndex() + 1);
-                funcionarioDAO.close();
+                Funcionario funcionario = (Funcionario) cbFuncionario.getSelectedItem();
 
                 FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
@@ -310,7 +308,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
                 dao.inserir(funcionarioHorario);
                 dao.close();
 
-                JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Horário cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
             }
         }
