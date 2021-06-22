@@ -383,7 +383,7 @@ public class FrmCadastroPrograma extends JFrame {
             );
                 dao.inserir(programa);
                 dao.close();
-                JOptionPane.showMessageDialog(null, "Horário cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Programa cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
             }          
         }

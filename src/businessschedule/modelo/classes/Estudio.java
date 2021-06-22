@@ -1,5 +1,6 @@
 package businessschedule.modelo.classes;
 
+import java.util.Objects;
 import lib.Excecoes;
 
 public class Estudio {
@@ -9,10 +10,15 @@ public class Estudio {
     public Estudio() {
     }
     
+    public Estudio(String nome) {
+        setNome(nome);
+    }
+    
     public Estudio(int id, String nome) {
         setId(id);
         setNome(nome);
     }
+    
 
     public int getId() {
         return id;
@@ -30,6 +36,24 @@ public class Estudio {
     public void setNome(String nome) {
         Excecoes.isNulo("Nome", nome);
         this.nome = nome;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estudio other = (Estudio) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -236,7 +236,6 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     
     public boolean verificarCampos() {
         if (txtData.getText().equals("") || txtHoraFinal.getText().equals("") || txtHoraInicial.getText().equals("")) {
-            // falta cb      
                   
             return false;
         }

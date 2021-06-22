@@ -1,5 +1,6 @@
 package businessschedule.modelo.classes;
 
+import java.util.Objects;
 import lib.Excecoes;
 
 public class Switcher {
@@ -7,6 +8,10 @@ public class Switcher {
     private String nome;
     
     public Switcher() {
+    }
+    
+     public Switcher( String nome) {
+        setNome(nome);
     }
     
     public Switcher(int id, String nome) {
@@ -32,6 +37,24 @@ public class Switcher {
         this.nome = nome;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Switcher other = (Switcher) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
+    
     @Override
     public String toString() {
         return "Id: " + id + " - Nome: " + nome;

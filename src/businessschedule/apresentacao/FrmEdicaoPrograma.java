@@ -1,7 +1,11 @@
 package businessschedule.apresentacao;
 
+import businessschedule.modelo.classes.Estudio;
 import businessschedule.modelo.classes.Programa;
+import businessschedule.modelo.classes.Switcher;
+import businessschedule.modelo.dao.EstudioDAO;
 import businessschedule.modelo.dao.ProgramaDAO;
+import businessschedule.modelo.dao.SwitcherDAO;
 
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
@@ -24,10 +28,17 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.MouseInputListener;
+import javax.swing.text.MaskFormatter;
+import lib.DataHora;
 
 import org.w3c.dom.events.MouseEvent;
 
@@ -57,8 +68,11 @@ public class FrmEdicaoPrograma extends JFrame {
     private JTextField txtData;
     private JTextField txtPesquisa;
     private JComboBox cbSwitcher;
-     private JComboBox cbEstudio;
+    private JComboBox cbEstudio;
     private int id;
+    private MaskFormatter frmHoraInicial;
+    private MaskFormatter frmData;
+    private MaskFormatter frmHoraFinal;
 
     public FrmEdicaoPrograma() {
         super("Business Schedule - Editar Programa");
@@ -67,6 +81,15 @@ public class FrmEdicaoPrograma extends JFrame {
 
     private void initComponents() {
 
+        
+        try {
+            frmHoraInicial = new MaskFormatter("##:##");
+            frmHoraFinal = new MaskFormatter("##:##");
+            frmData = new MaskFormatter("##/##/####");
+        } catch (ParseException erro) {
+            erro.printStackTrace();
+        }
+        
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
         jLabel3 = new JLabel();
@@ -74,14 +97,11 @@ public class FrmEdicaoPrograma extends JFrame {
         jLabel4 = new JLabel();
         txtNome = new JTextField();
         jLabel5 = new JLabel();
-        txtHorarioInicial = new JTextField();
         jLabel6 = new JLabel();
         jLabel7 = new JLabel();
         jLabel8 = new JLabel();
         jLabel9 = new JLabel();
-        txtHorarioFinal = new JTextField();
         txtTipo = new JTextField();
-        txtData = new JTextField();
         btnSalvar = new JButton();
         btnLimpar = new JButton();
         jScrollPane1 = new JScrollPane();
@@ -94,6 +114,9 @@ public class FrmEdicaoPrograma extends JFrame {
         btnPesquisar = new JButton();
         cbSwitcher = new JComboBox();
         cbEstudio = new JComboBox();
+        txtHorarioInicial = new JFormattedTextField(frmHoraInicial);
+        txtHorarioFinal = new JFormattedTextField(frmHoraFinal);
+        txtData = new JFormattedTextField(frmData);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +175,9 @@ public class FrmEdicaoPrograma extends JFrame {
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new PesquisarListener());
+        
+        preencherComboBoxSwitcher();
+        preencherComboBoxEstudio();
 
       GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,6 +332,28 @@ public class FrmEdicaoPrograma extends JFrame {
         btnSalvar.setEnabled(true);
     }
 
+        private void preencherComboBoxSwitcher() {
+        List<Switcher> lista = new ArrayList<>();
+
+        for (Switcher switcher : new SwitcherDAO().listar()) {
+            lista.add(switcher);
+        }
+
+        Switcher[] switcher = lista.toArray(new Switcher[lista.size()]);
+        cbSwitcher.setModel(new DefaultComboBoxModel<>(switcher));
+    }
+    
+        private void preencherComboBoxEstudio() {
+        List<Estudio> lista = new ArrayList<>();
+
+        for (Estudio estudio : new EstudioDAO().listar()) {
+            lista.add(estudio);
+        }
+
+        Estudio[] estudio = lista.toArray(new Estudio[lista.size()]);
+        cbEstudio.setModel(new DefaultComboBoxModel<>(estudio));
+    }
+        
     public boolean verificarCampos() {
         if (txtNome.getText().equals("") || txtHorarioInicial.getText().equals("") || txtHorarioFinal.getText().equals("") || txtTipo.getText().equals("") || txtData.getText().equals("")) {
             return false;
@@ -372,15 +420,19 @@ public class FrmEdicaoPrograma extends JFrame {
     
     private class TableMouseListener extends MouseAdapter {
         @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
+        public void mouseClicked(java.awt.event.MouseEvent e) {        
+           
             id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
             txtNome.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
             txtHorarioInicial.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
             txtHorarioFinal.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
-            txtHorarioFinal.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-            txtTipo.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
-            txtData.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-            //falta  a cb
+            txtTipo.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
+            txtData.setText(DataHora.formatarData(table.getValueAt(table.getSelectedRow(), 5).toString()).toString());
+            Switcher switcher = new Switcher(table.getValueAt(table.getSelectedRow(), 6).toString());
+            cbSwitcher.setSelectedItem(switcher);
+            Estudio estudio = new Estudio(table.getValueAt(table.getSelectedRow(), 7).toString());
+            cbEstudio.setSelectedItem(estudio);
+          
         }
     }
 
@@ -396,16 +448,18 @@ public class FrmEdicaoPrograma extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
-                ProgramaDAO dao = new ProgramaDAO();
-               /* Programa programa = new Programa(
-                    id, txtNome.getText(), txtHorarioInicial.getText(), txtHorarioFinal.getText(), txtTipo.getText()
-                );
-                dao.alterar(programa);*/
-                //falta  a cb
-                JOptionPane.showMessageDialog(null, "Administrador alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            Switcher switcher = (Switcher) cbSwitcher.getSelectedItem();
+            Estudio estudio = (Estudio) cbEstudio.getSelectedItem();
+               
+            ProgramaDAO dao = new ProgramaDAO();
+            Programa programa = new Programa(
+                id, txtNome.getText(), txtHorarioInicial.getText() + ":00", txtHorarioFinal.getText()  + ":00", txtTipo.getText(), DataHora.converterData(txtData.getText()), switcher, estudio
+            );
+                dao.alterar(programa);
+                dao.close();
+                JOptionPane.showMessageDialog(null, "Programa editado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
+            }       
         }
     }
 }
