@@ -83,7 +83,7 @@ public class FuncionarioHorarioDAO {
             stmt.setInt(1, funcionarioHorario.getId());
             stmt.setString(2, DataHora.personalizarHora(funcionarioHorario.getHorarioInicio()));
             stmt.setString(3, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
-            stmt.setString(4, DataHora.personalizarData(funcionarioHorario.getData()));
+            stmt.setString(4, DataHora.personalizarDataParaAmericano(funcionarioHorario.getData()));
             stmt.setInt(5, funcionarioHorario.getUsuario().getId());
             stmt.execute();
         } catch (SQLException erro) {
@@ -98,7 +98,7 @@ public class FuncionarioHorarioDAO {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, DataHora.personalizarHora(funcionarioHorario.getHorarioInicio()));
             stmt.setString(2, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
-            stmt.setString(3, DataHora.personalizarData(funcionarioHorario.getData()));
+            stmt.setString(3, DataHora.personalizarDataParaAmericano(funcionarioHorario.getData()));
             stmt.setInt(4, funcionarioHorario.getId());
             stmt.execute();
         } catch (SQLException erro) {

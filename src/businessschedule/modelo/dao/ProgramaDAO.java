@@ -100,7 +100,7 @@ public class ProgramaDAO {
             stmt.setString(3, DataHora.personalizarHora(programa.getHorarioInicio()));
             stmt.setString(4, DataHora.personalizarHora(programa.getHorarioFim()));
             stmt.setString(5, programa.getTipo());
-            stmt.setString(6, DataHora.personalizarData(programa.getData()));
+            stmt.setString(6, DataHora.personalizarDataParaAmericano(programa.getData()));
             stmt.setInt(7, programa.getSwitcher().getId());
             stmt.setInt(8, programa.getEstudio().getId()); 
             stmt.execute();
@@ -118,7 +118,7 @@ public class ProgramaDAO {
             stmt.setString(2, DataHora.personalizarHora(programa.getHorarioInicio()));
             stmt.setString(3, DataHora.personalizarHora(programa.getHorarioFim()));
             stmt.setString(4, programa.getTipo());
-            stmt.setString(5, DataHora.personalizarData(programa.getData()));
+            stmt.setString(5, DataHora.personalizarDataParaAmericano(programa.getData()));
             stmt.setInt(6, programa.getSwitcher().getId());
             stmt.setInt(7, programa.getEstudio().getId());
             stmt.setInt(8, programa.getId());

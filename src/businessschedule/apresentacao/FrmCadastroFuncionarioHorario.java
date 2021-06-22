@@ -46,9 +46,8 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private JFormattedTextField txtHoraInicial;
     private JFormattedTextField txtHoraFinal;
     private JFormattedTextField txtData;
-    private MaskFormatter frmHoraInicial;
+    private MaskFormatter frmHora;
     private MaskFormatter frmData;
-    private MaskFormatter frmHoraFinal;
     
     public FrmCadastroFuncionarioHorario() {
         super("Business Schedule - Cadastrar um Horário de Funcionário");
@@ -58,8 +57,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private void initComponents() {
 
         try {
-            frmHoraInicial = new MaskFormatter("##:##");
-            frmHoraFinal = new MaskFormatter("##:##");
+            frmHora = new MaskFormatter("##:##");
             frmData = new MaskFormatter("##/##/####");
         } catch (ParseException erro) {
             erro.printStackTrace();
@@ -78,8 +76,8 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         btnCadastro = new JButton();
         btnEdicao = new JButton();
         cbFuncionario = new JComboBox<>();
-        txtHoraInicial = new JFormattedTextField(frmHoraInicial);
-        txtHoraFinal = new JFormattedTextField(frmHoraFinal);
+        txtHoraInicial = new JFormattedTextField(frmHora);
+        txtHoraFinal = new JFormattedTextField(frmHora);
         txtData = new JFormattedTextField(frmData);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

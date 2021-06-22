@@ -95,12 +95,16 @@ public class DataHora {
         return horaFormatada.format(date);
     }
     
-    public static String personalizarData(Date date) {
+    public static String personalizarDataParaAmericano(Date date) {
         return dataFormatada.format(date);
+    }
+
+    public static String personalizarDataParaBrasileiro(Date date) {
+        return dataFormatada2.format(date);
     }
 
     public static String converterData(String data) {
         Date date = formatarDataPadraoBrasileiro(data);
-        return personalizarData(date);
+        return personalizarDataParaAmericano(date);
     }
 }

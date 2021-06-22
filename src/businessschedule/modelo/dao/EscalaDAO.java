@@ -94,8 +94,8 @@ public class EscalaDAO {
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, escala.getId());
-            stmt.setString(2, DataHora.personalizarData(escala.getDataInicio()));
-            stmt.setString(3, DataHora.personalizarData(escala.getDataFim()));
+            stmt.setString(2, DataHora.personalizarDataParaAmericano(escala.getDataInicio()));
+            stmt.setString(3, DataHora.personalizarDataParaAmericano(escala.getDataFim()));
             stmt.setString(4, escala.getAno());
             stmt.setInt(5, escala.getFuncionarioHorario().getId());
             
@@ -110,8 +110,8 @@ public class EscalaDAO {
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, DataHora.personalizarData(escala.getDataInicio()));
-            stmt.setString(2, DataHora.personalizarData(escala.getDataFim()));
+            stmt.setString(1, DataHora.personalizarDataParaAmericano(escala.getDataInicio()));
+            stmt.setString(2, DataHora.personalizarDataParaAmericano(escala.getDataFim()));
             stmt.setString(3, escala.getAno());
             stmt.setInt(4, escala.getId());
             stmt.execute();
