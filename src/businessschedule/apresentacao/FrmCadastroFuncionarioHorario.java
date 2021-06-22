@@ -228,6 +228,16 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         String[] campos = lista.toArray(new String[lista.size()]);
         cbFuncionario.setModel(new DefaultComboBoxModel<>(campos));
     }
+    
+    public boolean verificarCampos() {
+        if (txtData.getText().equals("") || txtHoraFinal.getText().equals("") || txtHoraInicial.getText().equals("")) {
+           // falta cb
+            
+            return false;
+        }
+
+        return true;
+    }
 
     private class SairListener implements ActionListener {
         @Override
@@ -281,14 +291,16 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
-            /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
-            );
-            dao.inserir(funcionarioHorario);*/
+            if(verificarCampos()){
+                FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
+                /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
+                    dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
+                );
+                dao.inserir(funcionarioHorario);*/
 
-            JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
+                JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
+            }
         }
     }
 }

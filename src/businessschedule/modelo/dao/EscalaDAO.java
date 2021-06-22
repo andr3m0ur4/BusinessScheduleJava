@@ -148,7 +148,7 @@ public class EscalaDAO {
         
         return id + 1;
     }
-
+    
     public ResultSet carregarGrade() {
         String sql = "SELECT e.id, e.data_inicio, e.data_fim, e.ano, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
@@ -185,15 +185,5 @@ public class EscalaDAO {
         }
 
         return rs;
-    }
-
-    public void close() {
-        try {
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
     }
 }

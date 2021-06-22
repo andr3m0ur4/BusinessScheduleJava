@@ -166,4 +166,43 @@ public class ProgramaDAO {
             erro.printStackTrace();
         }
     }
+    
+        public ResultSet carregarGrade() {
+                String sql = "SELECT p.id, p.nome, p.horario_inicio, p.horario_fim, p.tipo, p.data, s.nome AS nome_switcher, es.nome AS nome_estudio\n" +
+                "FROM programa AS p\n" +
+                "INNER JOIN switcher AS s\n" +
+                "ON p.id_switcher = s.id\n" +
+                "INNER JOIN estudio AS es\n" +
+                "ON p.id_estudio = es.id\n";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public ResultSet pesquisarPor(String valor) {
+        String sql = "SELECT p.*, s.nome as nome_switcher, es.nome as nome_estudio\n" +
+                "FROM programa AS p\n" +
+                "INNER JOIN switcher AS s\n" +
+                "ON p.id_switcher = s.id\n" +
+                "INNER JOIN estudio AS es\n" +
+                "ON p.id_estudio = es.id\n" +
+                "WHERE p.nome LIKE ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + valor + '%');
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
 }

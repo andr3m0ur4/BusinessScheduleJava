@@ -213,10 +213,10 @@ public class FrmMenuEdicao extends JFrame {
     private class ProgramaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            /* EdicaoPrograma ini = new EdicaoPrograma();
+            // TODO add your handling code here:
+            FrmEdicaoPrograma ini = new FrmEdicaoPrograma();
             ini.setVisible(true);
-            setVisible(false); */
+            setVisible(false);
         }
     }
 
