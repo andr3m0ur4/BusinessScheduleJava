@@ -24,10 +24,14 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.text.ParseException;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.MouseInputListener;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
+import lib.DataHora;
 
 import org.w3c.dom.events.MouseEvent;
 
@@ -44,8 +48,6 @@ public class FrmEdicaoEscala extends JFrame {
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
     private JScrollPane jScrollPane1;
     private JTable table;
     private JTextField txtDataInicial;
@@ -53,8 +55,9 @@ public class FrmEdicaoEscala extends JFrame {
     private JTextField txtAno;
     private JTextField txtPesquisa;
     private JTextField txtSenha;
-    private JComboBox cbHorario;
-    private JComboBox cbFuncionario;
+    private MaskFormatter frmData;
+    private MaskFormatter frmData2;
+    private MaskFormatter frmAno;
     private int id;
 
     public FrmEdicaoEscala() {
@@ -64,16 +67,22 @@ public class FrmEdicaoEscala extends JFrame {
 
     private void initComponents() {
 
+        try {
+            frmData = new MaskFormatter("##/##/####");
+            frmData2 = new MaskFormatter("##/##/####");
+            frmAno = new MaskFormatter("####");
+        } catch (ParseException erro) {
+            erro.printStackTrace();
+        }
+        
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
         jLabel3 = new JLabel();
-        txtDataInicial = new JTextField();
         jLabel4 = new JLabel();
-        txtDataFinal = new JTextField();
         jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
-        jLabel7 = new JLabel();
-        txtAno = new JTextField();
+        txtDataInicial = new JFormattedTextField(frmData);
+        txtDataFinal = new JFormattedTextField(frmData2);
+        txtAno = new JFormattedTextField(frmAno);
         btnSalvar = new JButton();
         btnLimpar = new JButton();
         jScrollPane1 = new JScrollPane();
@@ -84,8 +93,6 @@ public class FrmEdicaoEscala extends JFrame {
         btnMenuEdicao = new JButton();
         txtPesquisa = new JTextField();
         btnPesquisar = new JButton();
-        cbHorario = new JComboBox();
-        cbFuncionario = new JComboBox();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,12 +110,6 @@ public class FrmEdicaoEscala extends JFrame {
         jLabel5.setFont(new Font("Segoe UI", 0, 18));
         jLabel5.setText("Ano:");
 
-        jLabel6.setFont(new Font("Segoe UI", 0, 18));
-        jLabel6.setText("Horario:");
-        
-        jLabel7.setFont(new Font("Segoe UI", 0, 18));
-        jLabel7.setText("Funcionario:");
-
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new SalvarListener());
 
@@ -118,7 +119,7 @@ public class FrmEdicaoEscala extends JFrame {
         table.setModel(new ModeloGrade(
                 new EscalaDAO().carregarGrade(),
                 new String[] {
-                    "Código", "Data Inicio", "Data Final", "Ano", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                    "Código", "Data Inicio", "Data Final", "Ano"
                 }
         ));
         table.addMouseListener(new TableMouseListener());
@@ -155,21 +156,12 @@ public class FrmEdicaoEscala extends JFrame {
                             .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(119, 119, 119)
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -182,11 +174,12 @@ public class FrmEdicaoEscala extends JFrame {
                                         .addGap(1, 1, 1)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtAno))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(txtAno))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(93, 93, 93)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,7 +206,7 @@ public class FrmEdicaoEscala extends JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,19 +225,11 @@ public class FrmEdicaoEscala extends JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))))
+                        .addGap(133, 133, 133))))
         );
 
         pack();
@@ -265,7 +250,6 @@ public class FrmEdicaoEscala extends JFrame {
         txtDataInicial.setText("");
         txtDataFinal.setText("");
         txtAno.setText("");
-        // falta os cb
         btnSalvar.setEnabled(true);
     }
 
@@ -282,7 +266,7 @@ public class FrmEdicaoEscala extends JFrame {
         table.setModel(new ModeloGrade(
             new EscalaDAO().pesquisarPor(valor),
             new String[] {
-                       "Código", "Data Inicio", "Data Final", "Ano", "Funcionario", "Email", "Função", "Horario Incio", "Horario Fim", "Data"
+                       "Código", "Data Inicio", "Data Final", "Ano"
             }
         ));
     }
@@ -337,12 +321,15 @@ public class FrmEdicaoEscala extends JFrame {
     private class TableMouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
+      
+            Escala escala = new Escala();
+            
             id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
-            txtDataInicial.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
-            txtDataFinal.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+            escala = new Escala(table.getValueAt(table.getSelectedRow(), 1).toString());
+            txtDataInicial.setText(DataHora.personalizarDataParaBrasileiro(escala.getDataInicio()));
+            escala = new Escala(table.getValueAt(table.getSelectedRow(), 2).toString());
+            txtDataFinal.setText(DataHora.personalizarDataParaBrasileiro(escala.getDataInicio()));
             txtAno.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
-            //falta cb
-            txtSenha.setText("");
         }
     }
 
@@ -359,11 +346,10 @@ public class FrmEdicaoEscala extends JFrame {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
                 EscalaDAO dao = new EscalaDAO();
-              /*  Escala escala = new Escala(
-                    id, txtDataInicial.getText(), txtDataFinal.getText(), txtSenha.getText(), txtAno.getText(),
-                        // falta cb
+                Escala escala = new Escala(
+                    id, DataHora.converterData(txtDataInicial.getText()), DataHora.converterData(txtDataFinal.getText()), txtAno.getText()
                 );
-                dao.alterar(escala); */
+                dao.alterar(escala);
                 JOptionPane.showMessageDialog(null, "Escala alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);

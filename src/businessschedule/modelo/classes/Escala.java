@@ -11,6 +11,14 @@ public class Escala {
     private String dataFim;
     private String ano;
     
+    public Escala() {
+         
+    }
+     
+    public Escala(String dataInicio) {
+           setDataInicio(dataInicio);
+    }
+     
     public Escala(int id, String dataInicio, String dataFim, String ano) {
         setId(id);
         setDataInicio(dataInicio);
