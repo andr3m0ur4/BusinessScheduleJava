@@ -18,10 +18,5 @@ public class BusinessSchedule {
         FrmHome home = new FrmHome();
         home.setVisible(true);
 
-        
-
-        /* String str = "21/06/2021";
-
-        System.out.println(DataHora.converterData(str)); */
     }
 }
