@@ -23,7 +23,7 @@ public class EscalaDAO {
     
     public List<Escala> listar() {
         List<Escala> escalas = new ArrayList<>();
-        String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
+        /* String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
                     "INNER JOIN funcionarioHorario as fh\n" +
                     "on e.id_funcionario_horario = fh.id\n" +
@@ -49,14 +49,14 @@ public class EscalaDAO {
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        }
+        } */
         
         return escalas;
     }
     
     public Escala buscar(int id) {
         Escala escala = null;
-        String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
+        /* String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
                     "FROM escala AS e\n" +
                     "INNER JOIN funcionarioHorario as fh\n" +
                     "on e.id_funcionario_horario = fh.id\n" +
@@ -83,13 +83,13 @@ public class EscalaDAO {
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        }
+        } */
         
         return escala;
     }
     
     public void inserir(Escala escala) {
-        String sql = "INSERT INTO escala VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO escala VALUES(?, ?, ?, ?)";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -97,7 +97,6 @@ public class EscalaDAO {
             stmt.setString(2, DataHora.personalizarDataParaAmericano(escala.getDataInicio()));
             stmt.setString(3, DataHora.personalizarDataParaAmericano(escala.getDataFim()));
             stmt.setString(4, escala.getAno());
-            stmt.setInt(5, escala.getFuncionarioHorario().getId());
             
             stmt.execute();
         } catch (SQLException erro) {
