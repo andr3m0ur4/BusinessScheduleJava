@@ -24,7 +24,7 @@ public class FuncionarioHorarioDAO {
     
     public List<FuncionarioHorario> listar() {
         List<FuncionarioHorario> funcionarioHorarios = new ArrayList<>();
-        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\n" +
+        /* String sql = "SELECT fh.*, f.nome, f.email, f.funcao\n" +
                     "FROM funcionarioHorario AS fh\n" +
                     "INNER JOIN funcionario AS f\n" +
                     "ON fh.id_funcionario = f.id";
@@ -43,14 +43,14 @@ public class FuncionarioHorarioDAO {
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        }
+        } */
         
         return funcionarioHorarios;
     }
     
     public FuncionarioHorario buscar(int id) {
         FuncionarioHorario funcionarioHorario = null;
-        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
+        /* String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
             "FROM funcionarioHorario AS fh\n" +
             "INNER JOIN funcionario AS f\n" +
             "ON fh.id_funcionario = f.id\n" +
@@ -70,7 +70,7 @@ public class FuncionarioHorarioDAO {
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        }
+        } */
         
         return funcionarioHorario;
     }

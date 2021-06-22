@@ -11,14 +11,11 @@ public class Escala {
     private String dataFim;
     private String ano;
     
-    FuncionarioHorario funcionarioHorario;
-    
-    public Escala(int id, String dataInicio, String dataFim, String ano, FuncionarioHorario funcionarioHorario) {
+    public Escala(int id, String dataInicio, String dataFim, String ano) {
         setId(id);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         setAno(ano);
-        setFuncionarioHorario(funcionarioHorario);
     }
 
     public int getId() {
@@ -66,16 +63,8 @@ public class Escala {
         this.ano = ano;
     }
 
-    public FuncionarioHorario getFuncionarioHorario() {
-        return funcionarioHorario;
-    }
-
-    public void setFuncionarioHorario(FuncionarioHorario funcionarioHorario) {
-        this.funcionarioHorario = funcionarioHorario;
-    }
-
     @Override
     public String toString() {
-        return "Escala{" + "id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", ano=" + ano + ", funcionarioHorario=" + funcionarioHorario + '}';
+        return "Escala{" + "id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", ano=" + ano + '}';
     }
 }

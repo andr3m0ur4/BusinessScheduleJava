@@ -11,17 +11,19 @@ public class FuncionarioHorario {
     private String horarioFim;
     private String data;
     private Usuario usuario;
+    private Escala escala;
     
     public FuncionarioHorario() {
     }
     
-    public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data, Usuario usuario) {
+    public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data, Usuario usuario, Escala escala) {
         
         setId(id);
         setHorarioInicio(horarioInicio);
         setHorarioFim(horarioFim);
         setData(data);
         setUsuario(usuario);
+        setEscala(escala);
     }
 
     public int getId() {
@@ -78,8 +80,17 @@ public class FuncionarioHorario {
         this.usuario = usuario;
     }
 
+    public Escala getEscala() {
+        return escala;
+    }
+
+    public void setEscala(Escala escala) {
+        Excecoes.isNulo("Escala", escala);
+        this.escala = escala;
+    }
+
     @Override
     public String toString() {
-        return "FuncionarioHorario{" + "id=" + id + ", horarioInicio=" + horarioInicio + ", horarioFim=" + horarioFim + ", data=" + data + ", usuario=" + usuario + '}';
+        return "FuncionarioHorario{" + "id=" + id + ", horarioInicio=" + horarioInicio + ", horarioFim=" + horarioFim + ", data=" + data + ", usuario=" + usuario + ", escala=" + escala + '}';
     }
 }

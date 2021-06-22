@@ -7,13 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.text.MaskFormatter;
 
 import businessschedule.modelo.classes.Escala;
 import businessschedule.modelo.dao.EscalaDAO;
+import lib.DataHora;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
 public class FrmCadastroEscala extends JFrame {
@@ -36,12 +35,11 @@ public class FrmCadastroEscala extends JFrame {
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
     private JFormattedTextField txtDataInicial;
     private JFormattedTextField txtDataFinal;
     private JFormattedTextField txtAno;
     private MaskFormatter frmData;
+    private MaskFormatter frmData2;
     private MaskFormatter frmAno;
 
     public FrmCadastroEscala() {
@@ -53,6 +51,7 @@ public class FrmCadastroEscala extends JFrame {
 
         try {
             frmData = new MaskFormatter("##/##/####");
+            frmData2 = new MaskFormatter("##/##/####");
             frmAno = new MaskFormatter("####");
         } catch (ParseException erro) {
             erro.printStackTrace();
@@ -65,10 +64,8 @@ public class FrmCadastroEscala extends JFrame {
         jLabel3 = new JLabel();
         jLabel4 = new JLabel();
         jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
-        jLabel7 = new JLabel();
         txtDataInicial = new JFormattedTextField(frmData);
-        txtDataFinal = new JFormattedTextField(frmData);
+        txtDataFinal = new JFormattedTextField(frmData2);
         txtAno = new JFormattedTextField(frmAno);
         btnSalvar = new JButton();
         btnLimpar = new JButton();
@@ -89,19 +86,13 @@ public class FrmCadastroEscala extends JFrame {
         jLabel2.setText("Cadastre um Escala");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
-        jLabel3.setText("Data Incial:");
+        jLabel3.setText("Data Inicial:");
 
         jLabel4.setFont(new Font("Segoe UI", 0, 18));
         jLabel4.setText("Data Final:");
 
         jLabel5.setFont(new Font("Segoe UI", 0, 18));
         jLabel5.setText("Ano:");
-        
-        jLabel6.setFont(new Font("Segoe UI", 0, 18));
-        jLabel6.setText("Horario:");
-
-        jLabel7.setFont(new Font("Segoe UI", 0, 18));
-        jLabel7.setText("Funcionario:");
 
 
         btnSalvar.setText("Salvar");
@@ -214,9 +205,8 @@ public class FrmCadastroEscala extends JFrame {
         btnCadastro.setEnabled(true);
     }
 
-       public boolean verificarCampos() {
+    public boolean verificarCampos() {
         if (txtDataFinal.getText().equals("") || txtDataInicial.getText().equals("") || txtAno.getText().equals("")) {
-           // falta cb
             
             return false;
         }
@@ -276,12 +266,13 @@ public class FrmCadastroEscala extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            if(verificarCampos()){
+            if (verificarCampos()) {
                 EscalaDAO dao = new EscalaDAO();
-            /* Escala escala = new Escala(
-                    dao.lastId(), txtDataInicial.getText(), txtDataFinal.getText(), txtAno.getText(), cbHorario.
+                Escala escala = new Escala(
+                    dao.lastId(), DataHora.converterData(txtDataInicial.getText()), DataHora.converterData(txtDataFinal.getText()), txtAno.getText()
                 );
-                dao.inserir(escala);*/
+                dao.inserir(escala);
+                dao.close();
 
                 JOptionPane.showMessageDialog(null, "Escala cadastrada com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
