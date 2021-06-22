@@ -18,6 +18,11 @@ public class Programa {
     public Programa() {
     }
     
+    public Programa(String data) {
+
+        setData(data);
+    }
+    
     public Programa(int id, String nome, String horarioInicio, String horarioFim, String tipo, String data, Switcher switcher, Estudio estudio) {
         setId(id);
         setNome(nome);
@@ -114,6 +119,8 @@ public class Programa {
              + horarioFim + " - Tipo: " + tipo + " - Data: " + data + " - Switcher: " + switcher + " - Estudio: " + estudio;
         
     }
+    
+    
     
     
 }

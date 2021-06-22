@@ -110,7 +110,7 @@ public class ProgramaDAO {
     }
     
     public void alterar(Programa programa) {
-        String sql = "UPDATE programa SET nome = ?, horario_inicio = ?, horario_fim = ?, tipo = ?, data = ?, switcher = ?, estudio = ? WHERE id = ?";
+        String sql = "UPDATE programa SET nome = ?, horario_inicio = ?, horario_fim = ?, tipo = ?, data = ?, id_switcher = ?, id_estudio = ? WHERE id = ?";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -156,16 +156,6 @@ public class ProgramaDAO {
         
         return id + 1;
     }
-
-    public void close() {
-        try {
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
-    }
     
     public ResultSet carregarGrade() {
                 String sql = "SELECT p.id, p.nome, p.horario_inicio, p.horario_fim, p.tipo, p.data, s.nome AS nome_switcher, es.nome AS nome_estudio\n" +
@@ -203,6 +193,16 @@ public class ProgramaDAO {
         }
 
         return rs;
+    }
+    
+     public void close() {
+        try {
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
     }
 
 }
