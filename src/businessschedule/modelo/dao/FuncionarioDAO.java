@@ -164,8 +164,8 @@ public class FuncionarioDAO {
         
         return funcionario;
     }
-
-    public ResultSet carregarGrade() {
+       
+           public ResultSet carregarGrade() {
         String sql = "SELECT id, nome, email, funcao FROM funcionario";
 
         try {

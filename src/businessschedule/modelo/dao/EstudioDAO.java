@@ -117,8 +117,8 @@ public class EstudioDAO {
         
         return id + 1;
     }
-
-    public ResultSet carregarGrade() {
+    
+        public ResultSet carregarGrade() {
         String sql = "SELECT id, nome FROM estudio";
 
         try {

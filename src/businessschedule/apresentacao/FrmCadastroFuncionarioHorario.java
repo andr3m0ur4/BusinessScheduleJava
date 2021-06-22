@@ -236,13 +236,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     
     public boolean verificarCampos() {
         if (txtData.getText().equals("") || txtHoraFinal.getText().equals("") || txtHoraInicial.getText().equals("")) {
-           // falta cb
-            
+            // falta cb      
+                  
             return false;
         }
 
         return true;
     }
+    
 
     private class SairListener implements ActionListener {
         @Override
@@ -293,6 +294,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     }
 
     private class SalvarListener implements ActionListener {
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub

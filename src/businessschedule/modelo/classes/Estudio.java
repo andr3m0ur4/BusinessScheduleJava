@@ -34,7 +34,7 @@ public class Estudio {
 
     @Override
     public String toString() {
-        return "Id: " + id + "Nome: " + nome;
+        return "Id: " + id + " - Nome: " + nome;
     }
     
 }
