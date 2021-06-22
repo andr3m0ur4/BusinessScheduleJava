@@ -1,5 +1,6 @@
 package businessschedule.apresentacao;
 
+import businessschedule.modelo.classes.Estudio;
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -12,13 +13,23 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 import businessschedule.modelo.classes.Programa;
+import businessschedule.modelo.classes.Switcher;
+import businessschedule.modelo.dao.EstudioDAO;
 import businessschedule.modelo.dao.ProgramaDAO;
+import businessschedule.modelo.dao.SwitcherDAO;
 
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
+import lib.DataHora;
 
 public class FrmCadastroPrograma extends JFrame {
     private JButton btnCadastro;
@@ -43,6 +54,9 @@ public class FrmCadastroPrograma extends JFrame {
     private JTextField txtData;
     private JComboBox cbSwitcher;
     private JComboBox cbEstudio;
+    private MaskFormatter frmHoraInicial;
+    private MaskFormatter frmData;
+    private MaskFormatter frmHoraFinal;
     
 
     public FrmCadastroPrograma() {
@@ -52,6 +66,14 @@ public class FrmCadastroPrograma extends JFrame {
 
     private void initComponents() {
 
+        try {
+            frmHoraInicial = new MaskFormatter("##:##");
+            frmHoraFinal = new MaskFormatter("##:##");
+            frmData = new MaskFormatter("##/##/####");
+        } catch (ParseException erro) {
+            erro.printStackTrace();
+        }
+        
         btnSair = new JButton();
         btnHome = new JButton();
         jLabel1 = new JLabel();
@@ -64,16 +86,16 @@ public class FrmCadastroPrograma extends JFrame {
         jLabel8 = new JLabel();
         jLabel9 = new JLabel();
         txtNome = new JTextField();
-        txtHorarioInicial = new JTextField();
-        txtHorarioFinal = new JTextField();
         txtTipo = new JTextField();
-        txtData = new JTextField();
         btnSalvar = new JButton();
         btnLimpar = new JButton();
         btnCadastro = new JButton();
         btnEdicao = new JButton();
         cbSwitcher = new JComboBox();
         cbEstudio = new JComboBox();
+        txtHorarioInicial = new JFormattedTextField(frmHoraInicial);
+        txtHorarioFinal = new JFormattedTextField(frmHoraFinal);
+        txtData = new JFormattedTextField(frmData);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +142,9 @@ public class FrmCadastroPrograma extends JFrame {
 
         btnEdicao.setText("Menu de Edição");
         btnEdicao.addActionListener(new MenuEdicaoListener());
+        
+        preencherComboBoxSwitcher();
+        preencherComboBoxEstudio();
 
         GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,6 +289,28 @@ public class FrmCadastroPrograma extends JFrame {
         btnCadastro.setEnabled(true);
     }
     
+    private void preencherComboBoxSwitcher() {
+        List<Switcher> lista = new ArrayList<>();
+
+        for (Switcher switcher : new SwitcherDAO().listar()) {
+            lista.add(switcher);
+        }
+
+        Switcher[] switcher = lista.toArray(new Switcher[lista.size()]);
+        cbSwitcher.setModel(new DefaultComboBoxModel<>(switcher));
+    }
+    
+        private void preencherComboBoxEstudio() {
+        List<Estudio> lista = new ArrayList<>();
+
+        for (Estudio estudio : new EstudioDAO().listar()) {
+            lista.add(estudio);
+        }
+
+        Estudio[] estudio = lista.toArray(new Estudio[lista.size()]);
+        cbEstudio.setModel(new DefaultComboBoxModel<>(estudio));
+    }
+        
     public boolean verificarCampos() {
         if (txtNome.getText().equals("") || txtHorarioFinal.getText().equals("") || txtHorarioInicial.getText().equals("") || txtTipo.getText().equals("") || txtData.getText().equals("")) {
             //falta CB
@@ -326,15 +373,19 @@ public class FrmCadastroPrograma extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if(verificarCampos()) {
+                
+            Switcher switcher = (Switcher) cbSwitcher.getSelectedItem();
+            Estudio estudio = (Estudio) cbEstudio.getSelectedItem();
+               
             ProgramaDAO dao = new ProgramaDAO();
-           /* Programa programa = new Programa(
-                dao.lastId(), txtNome.getText(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtTipo.getText(), txtData.getText()
+            Programa programa = new Programa(
+                dao.lastId(), txtNome.getText(), txtHorarioInicial.getText() + ":00", txtHorarioFinal.getText()  + ":00", txtTipo.getText(), DataHora.converterData(txtData.getText()), switcher, estudio
             );
-            dao.inserir(programa);*/
-
-            JOptionPane.showMessageDialog(null, "Programa cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
-            }
+                dao.inserir(programa);
+                dao.close();
+                JOptionPane.showMessageDialog(null, "Horário cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
+            }          
         }
     }
 }
