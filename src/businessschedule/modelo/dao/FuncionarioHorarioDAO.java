@@ -84,7 +84,7 @@ public class FuncionarioHorarioDAO {
     }
     
     public void inserir(FuncionarioHorario funcionarioHorario) {
-        String sql = "INSERT INTO funcionarioHorario VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO funcionarioHorario VALUES(?, ?, ?, ?, ?, ?)";
         
         try {
             stmt = con.prepareStatement(sql);
@@ -93,6 +93,7 @@ public class FuncionarioHorarioDAO {
             stmt.setString(3, DataHora.personalizarHora(funcionarioHorario.getHorarioFim()));
             stmt.setString(4, DataHora.personalizarDataParaAmericano(funcionarioHorario.getData()));
             stmt.setInt(5, funcionarioHorario.getUsuario().getId());
+            stmt.setInt(6, funcionarioHorario.getEscala().getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();

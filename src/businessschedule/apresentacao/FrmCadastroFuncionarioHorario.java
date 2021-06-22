@@ -15,8 +15,10 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.text.MaskFormatter;
 
+import businessschedule.modelo.classes.Escala;
 import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.modelo.dao.EscalaDAO;
 import businessschedule.modelo.dao.FuncionarioDAO;
 import businessschedule.modelo.dao.FuncionarioHorarioDAO;
 import lib.DataHora;
@@ -42,11 +44,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     private JLabel jLabel4;
     private JLabel jLabel5;
     private JLabel jLabel6;
+    private JLabel jLabel7;
     private JComboBox<Funcionario> cbFuncionario;
+    private JComboBox<Escala> cbEscala;
     private JFormattedTextField txtHoraInicial;
     private JFormattedTextField txtHoraFinal;
     private JFormattedTextField txtData;
     private MaskFormatter frmHora;
+    private MaskFormatter frmHora2;
     private MaskFormatter frmData;
     
     public FrmCadastroFuncionarioHorario() {
@@ -58,6 +63,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
 
         try {
             frmHora = new MaskFormatter("##:##");
+            frmHora2 = new MaskFormatter("##:##");
             frmData = new MaskFormatter("##/##/####");
         } catch (ParseException erro) {
             erro.printStackTrace();
@@ -71,13 +77,15 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel4 = new JLabel();
         jLabel5 = new JLabel();
         jLabel6 = new JLabel();
+        jLabel7 = new JLabel();
         btnSalvar = new JButton();
         btnLimpar = new JButton();
         btnCadastro = new JButton();
         btnEdicao = new JButton();
         cbFuncionario = new JComboBox<>();
+        cbEscala = new JComboBox<>();
         txtHoraInicial = new JFormattedTextField(frmHora);
-        txtHoraFinal = new JFormattedTextField(frmHora);
+        txtHoraFinal = new JFormattedTextField(frmHora2);
         txtData = new JFormattedTextField(frmData);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,7 +99,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Cadastre um Horario");
+        jLabel2.setText("Cadastre um Horário");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
         jLabel3.setText("Hora Incial:");
@@ -105,6 +113,9 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel6.setFont(new Font("Segoe UI", 0, 18));
         jLabel6.setText("Funcionário:");
 
+        jLabel7.setFont(new Font("Segoe UI", 0, 18));
+        jLabel7.setText("Escala:");
+
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new SalvarListener());
 
@@ -117,7 +128,8 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         btnEdicao.setText("Menu de Edição");
         btnEdicao.addActionListener(new MenuEdicaoListener());
 
-        preencherComboBox();
+        preencherComboBoxFuncionario();
+        preencherComboBoxEscala();
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,31 +137,6 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtHoraInicial, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbFuncionario, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtHoraFinal, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtData, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(167, 167, 167)
                         .addComponent(jLabel2))
@@ -161,8 +148,41 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCadastro)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdicao, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(btnEdicao, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(15, 15, 15)
+                                    .addComponent(txtHoraInicial, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtHoraFinal, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtData, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cbEscala, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(106, 106, 106)
+                                    .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(cbFuncionario, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -177,10 +197,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(cbFuncionario, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbEscala, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -197,7 +221,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,7 +245,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         btnLimpar.setEnabled(true);
     }
 
-    private void preencherComboBox() {
+    private void preencherComboBoxFuncionario() {
         List<Funcionario> lista = new ArrayList<>();
 
         for (Funcionario funcionario : new FuncionarioDAO().listar()) {
@@ -230,6 +254,17 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
 
         Funcionario[] funcionarios = lista.toArray(new Funcionario[lista.size()]);
         cbFuncionario.setModel(new DefaultComboBoxModel<>(funcionarios));
+    }
+
+    private void preencherComboBoxEscala() {
+        List<Escala> lista = new ArrayList<>();
+
+        for (Escala escala : new EscalaDAO().listar()) {
+            lista.add(escala);
+        }
+
+        Escala[] escalas = lista.toArray(new Escala[lista.size()]);
+        cbEscala.setModel(new DefaultComboBoxModel<>(escalas));
     }
     
     public boolean verificarCampos() {
@@ -297,10 +332,11 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
                 Funcionario funcionario = (Funcionario) cbFuncionario.getSelectedItem();
+                Escala escala = (Escala) cbEscala.getSelectedItem();
 
                 FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                    dao.lastId(), txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario
+                    dao.lastId(), txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario, escala
                 );
                 dao.inserir(funcionarioHorario);
                 dao.close();

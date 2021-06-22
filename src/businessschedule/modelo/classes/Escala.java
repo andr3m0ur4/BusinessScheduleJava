@@ -65,6 +65,6 @@ public class Escala {
 
     @Override
     public String toString() {
-        return "Escala{" + "id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", ano=" + ano + '}';
+        return "DE: " + DataHora.personalizarDataParaBrasileiro(getDataInicio()) + " À " + DataHora.personalizarDataParaBrasileiro(getDataFim()) + ", " + ano;
     }
 }
