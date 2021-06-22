@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class DataHora {
     private static DateFormat dataFormatada = new SimpleDateFormat("yyyy-MM-dd");
+    private static DateFormat dataFormatada2 = new SimpleDateFormat("dd/MM/yyyy");
     private static DateFormat horaFormatada = new SimpleDateFormat("HH:mm:ss");
     private static DateFormat anoFormatado = new SimpleDateFormat("yyyy");
     private static Calendar calendario = Calendar.getInstance();
@@ -75,6 +76,20 @@ public class DataHora {
 
         return date;
     }
+
+    public static Date formatarDataPadraoBrasileiro(String data) {
+        Date date = null;
+
+        try {
+            date = dataFormatada2.parse(data);
+            calendario.setTime(date);
+            date = calendario.getTime();
+        } catch (ParseException erro) {
+            erro.printStackTrace();
+        }
+
+        return date;
+    }
     
     public static String personalizarHora(Date date) {
         return horaFormatada.format(date);
@@ -82,5 +97,10 @@ public class DataHora {
     
     public static String personalizarData(Date date) {
         return dataFormatada.format(date);
+    }
+
+    public static String converterData(String data) {
+        Date date = formatarDataPadraoBrasileiro(data);
+        return personalizarData(date);
     }
 }
