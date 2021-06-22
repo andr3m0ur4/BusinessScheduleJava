@@ -1,5 +1,6 @@
 package businessschedule.modelo.dao;
 
+import businessschedule.modelo.classes.Escala;
 import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.FuncionarioHorario;
 import businessschedule.util.Conexao;
@@ -24,36 +25,42 @@ public class FuncionarioHorarioDAO {
     
     public List<FuncionarioHorario> listar() {
         List<FuncionarioHorario> funcionarioHorarios = new ArrayList<>();
-        /* String sql = "SELECT fh.*, f.nome, f.email, f.funcao\n" +
-                    "FROM funcionarioHorario AS fh\n" +
-                    "INNER JOIN funcionario AS f\n" +
-                    "ON fh.id_funcionario = f.id";
+         String sql = "SELECT fh.horario_inicio, fh.horario_fim, fh.data, f.nome, f.email, f.funcao, esc.data_inicio, esc.data_fim, esc.ano\n" +
+            "FROM funcionarioHorario AS fh\n" +
+            "INNER JOIN funcionario AS f\n" +
+            "ON fh.id_funcionario = f.id\n" +
+            "INNER JOIN escala AS esc\n" +
+            "ON fh.id_escala = esc.id\n" +
+            "WHERE fh.id = fh.id";
         
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
+                Escala escala = new Escala(rs.getInt("id_escala"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"));
                 Funcionario funcionario = new Funcionario(rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao"));
                 FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
+                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario, escala
                 );
                 funcionarioHorarios.add(funcionarioHorario);
             }
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        } */
+        } 
         
         return funcionarioHorarios;
     }
     
     public FuncionarioHorario buscar(int id) {
         FuncionarioHorario funcionarioHorario = null;
-        /* String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
+        String sql = "SELECT fh.horario_inicio, fh.horario_fim, fh.data, f.nome, f.email, f.funcao, esc.data_inicio, esc.data_fim, esc.ano\n" +
             "FROM funcionarioHorario AS fh\n" +
             "INNER JOIN funcionario AS f\n" +
             "ON fh.id_funcionario = f.id\n" +
+            "INNER JOIN escala AS esc\n" +
+            "ON fh.id_escala = esc.id\n" +
             "WHERE fh.id = ?";
         
         try {
@@ -62,15 +69,16 @@ public class FuncionarioHorarioDAO {
             rs = stmt.executeQuery();
             
             if (rs.next()) {
-                Funcionario funcionario = new Funcionario(rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao"));
-                funcionarioHorario = new FuncionarioHorario(
-                       rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
+                    Escala escala = new Escala(rs.getInt("id_escala"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"));
+                    Funcionario funcionario = new Funcionario(rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao"));
+                    funcionarioHorario = new FuncionarioHorario(
+                        rs.getInt("id"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario, escala
                 );
             }
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        } */
+        } 
         
         return funcionarioHorario;
     }
