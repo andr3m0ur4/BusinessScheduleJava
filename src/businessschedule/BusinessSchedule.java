@@ -1,7 +1,13 @@
 package businessschedule;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import businessschedule.apresentacao.FrmHome;
 import businessschedule.apresentacao.FrmLogin;
+import lib.DataHora;
 
 public class BusinessSchedule {
     
@@ -11,5 +17,11 @@ public class BusinessSchedule {
         
         FrmHome home = new FrmHome();
         home.setVisible(true);
+
+        
+
+        /* String str = "21/06/2021";
+
+        System.out.println(DataHora.converterData(str)); */
     }
 }

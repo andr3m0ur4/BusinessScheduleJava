@@ -167,7 +167,7 @@ public class ProgramaDAO {
         }
     }
     
-        public ResultSet carregarGrade() {
+    public ResultSet carregarGrade() {
                 String sql = "SELECT p.id, p.nome, p.horario_inicio, p.horario_fim, p.tipo, p.data, s.nome AS nome_switcher, es.nome AS nome_estudio\n" +
                 "FROM programa AS p\n" +
                 "INNER JOIN switcher AS s\n" +

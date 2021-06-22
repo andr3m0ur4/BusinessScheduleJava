@@ -15,8 +15,11 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.text.MaskFormatter;
 
+import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.modelo.dao.FuncionarioDAO;
 import businessschedule.modelo.dao.FuncionarioHorarioDAO;
+import lib.DataHora;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -222,9 +225,11 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
 
     private void preencherComboBox() {
         List<String> lista = new ArrayList<>();
+
         for (FuncionarioHorario funcionarioHorario : new FuncionarioHorarioDAO().listar()) {
             lista.add(funcionarioHorario.getUsuario().getNome());
         }
+
         String[] campos = lista.toArray(new String[lista.size()]);
         cbFuncionario.setModel(new DefaultComboBoxModel<>(campos));
     }
@@ -291,12 +296,17 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            if(verificarCampos()){
+            if (verificarCampos()) {
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                Funcionario funcionario = funcionarioDAO.buscar(cbFuncionario.getSelectedIndex() + 1);
+                funcionarioDAO.close();
+
                 FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
-                /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                    dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
+                FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
+                    dao.lastId(), txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario
                 );
-                dao.inserir(funcionarioHorario);*/
+                dao.inserir(funcionarioHorario);
+                dao.close();
 
                 JOptionPane.showMessageDialog(null, "Horario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();

@@ -284,14 +284,14 @@ public class FrmCadastroEscala extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if(verificarCampos()){
-            EscalaDAO dao = new EscalaDAO();
-           /* Escala escala = new Escala(
-                dao.lastId(), txtDataInicial.getText(), txtDataFinal.getText(), txtAno.getText(), cbHorario.
-            );
-            dao.inserir(escala);*/
+                EscalaDAO dao = new EscalaDAO();
+            /* Escala escala = new Escala(
+                    dao.lastId(), txtDataInicial.getText(), txtDataFinal.getText(), txtAno.getText(), cbHorario.
+                );
+                dao.inserir(escala);*/
 
-            JOptionPane.showMessageDialog(null, "Escala cadastrada com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
+                JOptionPane.showMessageDialog(null, "Escala cadastrada com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limpar();
             }
         }
     }
