@@ -24,11 +24,10 @@ public class FuncionarioHorarioDAO {
     
     public List<FuncionarioHorario> listar() {
         List<FuncionarioHorario> funcionarioHorarios = new ArrayList<>();
-        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\\n\" +\n" +
-            "\"FROM funcionarioHorario AS fh\\n\" +\n" +
-            "\"INNER JOIN funcionario AS f\\n\" +\n" +
-            "\"ON fh.id_funcionario = f.id\\n\" + \n" +
-            "WHERE fh.id = ?";
+        String sql = "SELECT fh.*, f.nome, f.email, f.funcao\n" +
+                    "FROM funcionarioHorario AS fh\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON fh.id_funcionario = f.id";
         
         try {
             stmt = con.prepareStatement(sql);
