@@ -231,13 +231,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     
     public boolean verificarCampos() {
         if (txtData.getText().equals("") || txtHoraFinal.getText().equals("") || txtHoraInicial.getText().equals("")) {
-           // falta cb
-            
+            // falta cb      
+                  
             return false;
         }
 
         return true;
     }
+    
 
     private class SairListener implements ActionListener {
         @Override
@@ -288,13 +289,14 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
     }
 
     private class SalvarListener implements ActionListener {
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if(verificarCampos()){
             FuncionarioHorarioDAO dao = new FuncionarioHorarioDAO();
             /*FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText()
+                dao.lastId(), txtHoraInicial.getText(), txtHoraFinal.getText(), txtData.getText(), 10
             );
             dao.inserir(funcionarioHorario);*/
 
