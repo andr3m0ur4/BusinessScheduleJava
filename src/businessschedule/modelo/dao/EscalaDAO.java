@@ -23,33 +23,22 @@ public class EscalaDAO {
     
     public List<Escala> listar() {
         List<Escala> escalas = new ArrayList<>();
-        /* String sql = "SELECT e.*, f.nome, f.email, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data\n" +
-                    "FROM escala AS e\n" +
-                    "INNER JOIN funcionarioHorario as fh\n" +
-                    "on e.id_funcionario_horario = fh.id\n" +
-                    "INNER JOIN funcionario AS f\n" +
-                    "ON fh.id_funcionario = f.id";
+        String sql = "SELECT * FROM escala";
         
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                Funcionario funcionario = new Funcionario(
-                        rs.getInt("id_funcionario"), rs.getString("nome"), rs.getString("email"), rs.getString("funcao")
-                );
-                FuncionarioHorario funcionarioHorario = new FuncionarioHorario(
-                        rs.getInt("id_funcionario_horario"), rs.getString("horario_inicio"), rs.getString("horario_fim"), rs.getString("data"), funcionario
-                );
                 Escala escala = new Escala(
-                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano"), funcionarioHorario
+                        rs.getInt("id"), rs.getString("data_inicio"), rs.getString("data_fim"), rs.getString("ano")
                 );
                 escalas.add(escala);
             }
             
         } catch (SQLException erro) {
             erro.printStackTrace();
-        } */
+        }
         
         return escalas;
     }
