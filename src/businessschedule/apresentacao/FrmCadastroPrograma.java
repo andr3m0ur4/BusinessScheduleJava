@@ -120,8 +120,6 @@ public class FrmCadastroPrograma extends JFrame {
 
         btnEdicao.setText("Menu de Edição");
         btnEdicao.addActionListener(new MenuEdicaoListener());
-        
-        preencherComboBoxSwitcher();
 
         GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
