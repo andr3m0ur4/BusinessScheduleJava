@@ -63,6 +63,54 @@ public class FrmLogin extends JFrame {
         btnLogin.setText("Entrar");
         btnLogin.addActionListener(new LoginListener());
 
+        setLayout();
+        centralizar();
+    }
+    
+    private void centralizar() {
+        Dimension resolucao = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamanhoTela = getSize();
+        
+        int largura = (resolucao.width - tamanhoTela.width) / 2;
+        int altura = (resolucao.height - tamanhoTela.height) / 2;
+        
+        setLocation(largura, altura);
+    }
+
+    private class LoginListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (comboBox.getSelectedIndex() == 0) {
+                AdministradorDAO dao = new AdministradorDAO();
+                
+                if (dao.login(txtEmail.getText(), txtSenha.getText())) {
+                    dao.close();
+                    BusinessSchedule.usuario = true;
+
+                    FrmHome ini = new FrmHome();
+                    ini.setVisible(true);
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
+                }
+            } else {
+                FuncionarioDAO dao = new FuncionarioDAO();
+
+                if (dao.login(txtEmail.getText(), txtSenha.getText())) {
+                    dao.close();
+                    BusinessSchedule.usuario = false;
+
+                    FrmHome ini = new FrmHome();
+                    ini.setVisible(true);
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
+                }
+            }
+        }
+    }
+
+    private void setLayout() {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,49 +158,5 @@ public class FrmLogin extends JFrame {
         );
 
         pack();
-        centralizar();
-    }
-    
-    private void centralizar() {
-        Dimension resolucao = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension tamanhoTela = getSize();
-        
-        int largura = (resolucao.width - tamanhoTela.width) / 2;
-        int altura = (resolucao.height - tamanhoTela.height) / 2;
-        
-        setLocation(largura, altura);
-    }
-
-    private class LoginListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (comboBox.getSelectedIndex() == 0) {
-                AdministradorDAO dao = new AdministradorDAO();
-                
-                if (dao.login(txtEmail.getText(), txtSenha.getText())) {
-                    dao.close();
-                    BusinessSchedule.usuario = true;
-
-                    FrmHome ini = new FrmHome();
-                    ini.setVisible(true);
-                    setVisible(false);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
-                }
-            } else {
-                FuncionarioDAO dao = new FuncionarioDAO();
-
-                if (dao.login(txtEmail.getText(), txtSenha.getText())) {
-                    dao.close();
-                    BusinessSchedule.usuario = false;
-
-                    FrmHome ini = new FrmHome();
-                    ini.setVisible(true);
-                    setVisible(false);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
-                }
-            }
-        }
     }
 }
