@@ -162,10 +162,10 @@ public class FrmEdicaoPrograma extends JFrame {
         btnHome.setText("Home");
         btnHome.addActionListener(new HomeListener());
 
-        btnMenuCadastro.setText("Cadastro");
+        btnMenuCadastro.setText("Menu de Cadastro");
         btnMenuCadastro.addActionListener(new MenuCadastroListener());
 
-        btnMenuEdicao.setText("Edição");
+        btnMenuEdicao.setText("Menu de Edição");
         btnMenuEdicao.addActionListener(new MenuEdicaoListener());
 
         btnPesquisar.setText("Pesquisar");

@@ -102,7 +102,7 @@ public class FrmCadastroFuncionarioHorario extends JFrame {
         jLabel2.setText("Cadastre um Horário");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
-        jLabel3.setText("Hora Incial:");
+        jLabel3.setText("Hora Inicial:");
 
         jLabel4.setFont(new Font("Segoe UI", 0, 18));
         jLabel4.setText("Hora Final:");

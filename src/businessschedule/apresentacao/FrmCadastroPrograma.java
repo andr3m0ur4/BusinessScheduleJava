@@ -114,7 +114,7 @@ public class FrmCadastroPrograma extends JFrame {
         jLabel3.setText("Nome:");
 
         jLabel4.setFont(new Font("Segoe UI", 0, 18));
-        jLabel4.setText("Hora Incial:");
+        jLabel4.setText("Hora Inicial:");
 
         jLabel5.setFont(new Font("Segoe UI", 0, 18));
         jLabel5.setText("Hora Final:");

@@ -95,7 +95,7 @@ public class FrmEdicaoEscala extends JFrame {
         jLabel2.setText("Edite uma Escala");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
-        jLabel3.setText("Data Incial:");
+        jLabel3.setText("Data Inicial:");
 
         jLabel4.setFont(new Font("Segoe UI", 0, 18));
         jLabel4.setText("Data Final:");

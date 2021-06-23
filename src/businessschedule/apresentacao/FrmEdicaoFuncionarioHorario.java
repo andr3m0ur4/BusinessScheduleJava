@@ -148,10 +148,10 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
         btnHome.setText("Home");
         btnHome.addActionListener(new HomeListener());
 
-        btnCadastro.setText("Cadastro");
+        btnCadastro.setText("Menu de Cadastro");
         btnCadastro.addActionListener(new MenuCadastroListener());
 
-        btnEdicao.setText("Edição");
+        btnEdicao.setText("Menu de Edição");
         btnEdicao.addActionListener(new MenuEdicaoListener());
 
         btnPesquisar.setText("Pesquisar");
