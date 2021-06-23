@@ -127,10 +127,10 @@ public class FrmEdicaoEscala extends JFrame {
         btnHome.setText("Home");
         btnHome.addActionListener(new HomeListener());
 
-        btnMenuCadastro.setText("Cadastro");
+        btnMenuCadastro.setText("Menu de Cadastro");
         btnMenuCadastro.addActionListener(new MenuCadastroListener());
 
-        btnMenuEdicao.setText("Edição");
+        btnMenuEdicao.setText("Menu de Edição");
         btnMenuEdicao.addActionListener(new MenuEdicaoListener());
 
         btnPesquisar.setText("Pesquisar");
@@ -329,9 +329,6 @@ public class FrmEdicaoEscala extends JFrame {
     private class TableMouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
-      
-            Escala escala = new Escala();
-            
             id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
             txtDataInicial.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
             txtDataFinal.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
