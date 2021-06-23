@@ -176,6 +176,7 @@ public class FrmEdicaoPrograma extends JFrame {
         
         preencherComboBoxSwitcher();
         preencherComboBoxEstudio();
+        ajustarColunas();
 
       GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -369,6 +370,15 @@ public class FrmEdicaoPrograma extends JFrame {
         ));
     }
 
+    private void ajustarColunas() {
+        Programa programa;
+
+        for (int i = 0; i < table.getRowCount(); i++) {
+            programa = new Programa(table.getValueAt(i, 5).toString());
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(programa.getData()), i, 5);
+        }
+    }
+
     private class LimparListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -425,8 +435,7 @@ public class FrmEdicaoPrograma extends JFrame {
             txtHorarioInicial.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
             txtHorarioFinal.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
             txtTipo.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-            Programa programa = new Programa(table.getValueAt(table.getSelectedRow(), 5).toString());
-            txtData.setText(DataHora.personalizarDataParaBrasileiro(programa.getData()));
+            txtData.setText(table.getValueAt(table.getSelectedRow(), 5).toString());
             Switcher switcher = new Switcher(table.getValueAt(table.getSelectedRow(), 6).toString());
             cbSwitcher.setSelectedItem(switcher);
             Estudio estudio = new Estudio(table.getValueAt(table.getSelectedRow(), 7).toString());
