@@ -19,6 +19,11 @@ public class Escala {
     public Escala(String dataInicio) {
            setDataInicio(dataInicio);
     }
+    
+    public Escala(String dataInicio, String dataFim) {
+           setDataInicio(dataInicio);
+           setDataFim(dataFim);
+    }
      
     public Escala(int id, String dataInicio, String dataFim, String ano) {
         setId(id);
@@ -70,6 +75,24 @@ public class Escala {
         }
         
         this.ano = ano;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Escala other = (Escala) obj;
+        if (!Objects.equals(this.dataInicio, other.dataInicio)) {
+            return false;
+        }
+        return true;
     }
     
     @Override

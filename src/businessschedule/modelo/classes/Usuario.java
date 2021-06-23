@@ -100,7 +100,6 @@ public class Usuario {
         return true;
     }
  
-
     @Override
     public String toString() {
         return "ID: " + id + " - Nome: " + nome + " - E-mail: " + email + " - Função: " + funcao;

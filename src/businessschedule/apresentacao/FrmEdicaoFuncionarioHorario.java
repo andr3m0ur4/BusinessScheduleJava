@@ -405,9 +405,11 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
             
             Funcionario funcionario = new Funcionario(table.getValueAt(table.getSelectedRow(), 4).toString());
             cbFuncionario.setSelectedItem(funcionario);
-           // Escala Escala = new Escala(table.getValueAt(table.getSelectedRow(), 7).toString());
-            //cbEscala.setSelectedItem(Escala);
-            //falta cb
+
+            String dataInicio = DataHora.converterData(table.getValueAt(table.getSelectedRow(), 7).toString());
+            String dataFim = DataHora.converterData(table.getValueAt(table.getSelectedRow(), 8).toString());
+            Escala escala = new Escala(dataInicio, dataFim);
+            cbEscala.setSelectedItem(escala);
         }
     }
 
@@ -431,7 +433,6 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
                     id, txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario, escala
                 );
                 dao.alterar(funcionarioHorario);
-                dao.close();
                 JOptionPane.showMessageDialog(null, "Escala alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
