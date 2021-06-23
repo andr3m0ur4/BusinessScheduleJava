@@ -123,7 +123,7 @@ public class FrmEdicaoPrograma extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Edite um Funcionario");
+        jLabel2.setText("Edite um Programa");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
         jLabel3.setText("Nome:");
@@ -459,7 +459,9 @@ public class FrmEdicaoPrograma extends JFrame {
                 dao.alterar(programa);
                 JOptionPane.showMessageDialog(null, "Programa editado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
-            }       
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
+            }   
         }
     }
 }

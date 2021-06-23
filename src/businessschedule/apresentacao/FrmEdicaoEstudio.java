@@ -74,7 +74,7 @@ public class FrmEdicaoEstudio extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Edite um Administrador");
+        jLabel2.setText("Edite um Estudio");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
         jLabel3.setText("Nome:");
@@ -292,7 +292,7 @@ public class FrmEdicaoEstudio extends JFrame {
                     id, txtNome.getText()
                 );
                 dao.alterar(estudio);
-                JOptionPane.showMessageDialog(null, "Switcher alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Estudio alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

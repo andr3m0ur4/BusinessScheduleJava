@@ -353,7 +353,7 @@ public class FrmEdicaoFuncionario extends JFrame {
                     id, txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
                 );
                 dao.alterar(funcionario);
-                JOptionPane.showMessageDialog(null, "Administrador alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

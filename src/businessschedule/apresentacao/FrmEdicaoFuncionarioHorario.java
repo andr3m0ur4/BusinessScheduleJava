@@ -433,7 +433,7 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
                     id, txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario, escala
                 );
                 dao.alterar(funcionarioHorario);
-                JOptionPane.showMessageDialog(null, "Escala alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Horario alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

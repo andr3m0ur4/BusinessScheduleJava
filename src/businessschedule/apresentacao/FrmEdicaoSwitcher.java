@@ -74,7 +74,7 @@ public class FrmEdicaoSwitcher extends JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/businessschedule/apresentacao/img/logo.png")));
 
         jLabel2.setFont(new Font("Segoe UI", 0, 24));
-        jLabel2.setText("Edite um Administrador");
+        jLabel2.setText("Edite um Switcher");
 
         jLabel3.setFont(new Font("Segoe UI", 0, 18));
         jLabel3.setText("Nome:");

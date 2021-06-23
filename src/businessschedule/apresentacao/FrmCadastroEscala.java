@@ -276,6 +276,8 @@ public class FrmCadastroEscala extends JFrame {
 
                 JOptionPane.showMessageDialog(null, "Escala cadastrada com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
