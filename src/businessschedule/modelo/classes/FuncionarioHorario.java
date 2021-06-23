@@ -16,8 +16,11 @@ public class FuncionarioHorario {
     public FuncionarioHorario() {
     }
     
+    public FuncionarioHorario( String data) {
+        setData(data); 
+    }
+    
     public FuncionarioHorario(int id, String horarioInicio, String horarioFim, String data, Usuario usuario, Escala escala) {
-        
         setId(id);
         setHorarioInicio(horarioInicio);
         setHorarioFim(horarioFim);

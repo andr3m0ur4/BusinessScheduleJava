@@ -1,6 +1,7 @@
 package businessschedule.modelo.classes;
 
 import java.util.Date;
+import java.util.Objects;
 
 import lib.DataHora;
 import lib.Excecoes;
@@ -11,6 +12,14 @@ public class Escala {
     private String dataFim;
     private String ano;
     
+    public Escala() {
+         
+    }
+     
+    public Escala(String dataInicio) {
+           setDataInicio(dataInicio);
+    }
+     
     public Escala(int id, String dataInicio, String dataFim, String ano) {
         setId(id);
         setDataInicio(dataInicio);
@@ -62,7 +71,7 @@ public class Escala {
         
         this.ano = ano;
     }
-
+    
     @Override
     public String toString() {
         return "DE: " + DataHora.personalizarDataParaBrasileiro(getDataInicio()) + " À " + DataHora.personalizarDataParaBrasileiro(getDataFim()) + ", " + ano;
