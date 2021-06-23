@@ -164,12 +164,12 @@ public class FuncionarioHorarioDAO {
 
     public ResultSet pesquisarPor(String valor) {
         String sql = "SELECT fh.id, fh.horario_inicio, fh.horario_fim, fh.data, f.nome, f.email, f.funcao, esc.data_inicio, esc.data_fim, esc.ano\n" +
-            "FROM funcionarioHorario AS fh\n" +
-            "INNER JOIN funcionario AS f\n" +
-            "ON fh.id_funcionario = f.id\n" +
-            "INNER JOIN escala AS esc\n" +
-            "ON fh.id_escala = esc.id\n"+
-            "WHERE f.nome LIKE ?";;
+                    "FROM funcionarioHorario AS fh\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON fh.id_funcionario = f.id\n" +
+                    "INNER JOIN escala AS esc\n" +
+                    "ON fh.id_escala = esc.id\n"+
+                    "WHERE f.nome LIKE ?";;
 
         try {
             stmt = con.prepareStatement(sql);

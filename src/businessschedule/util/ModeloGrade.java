@@ -70,6 +70,12 @@ public class ModeloGrade extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return linhas.get(rowIndex).get(columnIndex);
     }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        List<Object> linha = linhas.get(rowIndex);
+        linha.set(columnIndex, aValue);
+    }
     
     public List<List<Object>> getLinhas() {
         return linhas;
