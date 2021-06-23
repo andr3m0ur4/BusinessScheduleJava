@@ -136,6 +136,8 @@ public class FrmEdicaoEscala extends JFrame {
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new PesquisarListener());
 
+        ajustarColunas();
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,6 +269,16 @@ public class FrmEdicaoEscala extends JFrame {
         ));
     }
 
+    private void ajustarColunas() {
+        Escala escala;
+
+        for (int i = 0; i < table.getRowCount(); i++) {
+            escala = new Escala(table.getValueAt(i, 1).toString(), table.getValueAt(i, 2).toString());
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(escala.getDataInicio()), i, 1);
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(escala.getDataFim()), i, 2);
+        }
+    }
+
     private class LimparListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -321,10 +333,8 @@ public class FrmEdicaoEscala extends JFrame {
             Escala escala = new Escala();
             
             id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
-            escala = new Escala(table.getValueAt(table.getSelectedRow(), 1).toString());
-            txtDataInicial.setText(DataHora.personalizarDataParaBrasileiro(escala.getDataInicio()));
-            escala = new Escala(table.getValueAt(table.getSelectedRow(), 2).toString());
-            txtDataFinal.setText(DataHora.personalizarDataParaBrasileiro(escala.getDataInicio()));
+            txtDataInicial.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+            txtDataFinal.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
             txtAno.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
         }
     }

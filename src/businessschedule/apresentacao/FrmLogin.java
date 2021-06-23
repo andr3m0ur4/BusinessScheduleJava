@@ -130,6 +130,7 @@ public class FrmLogin extends JFrame {
                 AdministradorDAO dao = new AdministradorDAO();
                 
                 if (dao.login(txtEmail.getText(), txtSenha.getText())) {
+                    dao.close();
                     BusinessSchedule.usuario = true;
 
                     FrmHome ini = new FrmHome();
@@ -142,6 +143,7 @@ public class FrmLogin extends JFrame {
                 FuncionarioDAO dao = new FuncionarioDAO();
 
                 if (dao.login(txtEmail.getText(), txtSenha.getText())) {
+                    dao.close();
                     BusinessSchedule.usuario = false;
 
                     FrmHome ini = new FrmHome();
