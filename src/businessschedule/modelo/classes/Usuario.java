@@ -1,5 +1,6 @@
 package businessschedule.modelo.classes;
 
+import java.util.Objects;
 import lib.Excecoes;
 
 public class Usuario {
@@ -10,6 +11,10 @@ public class Usuario {
     private String funcao;
 
     public Usuario() {
+    }
+    
+    public Usuario(String nome) {
+        setNome(nome);
     }
 
     public Usuario(int id, String nome, String email, String senha, String funcao) {
@@ -77,6 +82,23 @@ public class Usuario {
         this.funcao = funcao;
     }
     
+     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
  
 
     @Override
