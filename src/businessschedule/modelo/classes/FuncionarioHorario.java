@@ -16,7 +16,7 @@ public class FuncionarioHorario {
     public FuncionarioHorario() {
     }
     
-    public FuncionarioHorario( String data) {
+    public FuncionarioHorario(String data) {
         setData(data); 
     }
     
