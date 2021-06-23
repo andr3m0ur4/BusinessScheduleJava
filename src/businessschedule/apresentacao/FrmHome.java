@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
+import businessschedule.BusinessSchedule;
 import businessschedule.modelo.classes.FuncionarioHorario;
 import businessschedule.modelo.dao.FuncionarioHorarioDAO;
 import businessschedule.util.ModeloGrade;
@@ -47,6 +48,8 @@ public class FrmHome extends JFrame {
         jLabel2 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        validarUsuario();
 
         table.setModel(new ModeloGrade(
             new FuncionarioHorarioDAO().carregarEscalaGrade(),
@@ -142,6 +145,13 @@ public class FrmHome extends JFrame {
 
             funcionarioHorario.setData(table.getValueAt(i, 6).toString());
             table.setValueAt(DataHora.personalizarDataParaBrasileiro(funcionarioHorario.getData()), i, 6);
+        }
+    }
+
+    private void validarUsuario() {
+        if (!BusinessSchedule.usuario) {
+            btnCadastrar.setEnabled(false);
+            btnEditar.setEnabled(false);
         }
     }
 

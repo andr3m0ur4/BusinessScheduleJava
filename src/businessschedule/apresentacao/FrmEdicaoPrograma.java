@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.awt.Cursor;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +154,8 @@ public class FrmEdicaoPrograma extends JFrame {
                     "Código", "Nome", "Horario Inicial", "Horario Final", "tipo", "Data", "Switcher", "Estudio"
                 }
         ));
+        table.setToolTipText("Escolha um programa para editar");
+        table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
         jScrollPane1.setViewportView(table);
 

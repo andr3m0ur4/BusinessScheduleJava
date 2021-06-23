@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.awt.Cursor;
 import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
@@ -115,6 +116,8 @@ public class FrmEdicaoEscala extends JFrame {
                     "Código", "Data Inicio", "Data Final", "Ano"
                 }
         ));
+        table.setToolTipText("Escolha uma escala para editar");
+        table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
         jScrollPane1.setViewportView(table);
 

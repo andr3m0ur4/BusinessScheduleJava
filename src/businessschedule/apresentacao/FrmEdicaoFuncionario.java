@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.awt.Cursor;
 
 public class FrmEdicaoFuncionario extends JFrame {
     private JButton btnHome;
@@ -107,6 +108,8 @@ public class FrmEdicaoFuncionario extends JFrame {
                     "Código", "Nome", "Email", "Função"
                 }
         ));
+        table.setToolTipText("Escolha um funcionário para editar");
+        table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
         jScrollPane1.setViewportView(table);
 

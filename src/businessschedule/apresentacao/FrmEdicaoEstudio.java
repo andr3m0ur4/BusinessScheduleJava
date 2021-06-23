@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.awt.Cursor;
 
 public class FrmEdicaoEstudio extends JFrame {
     private JButton btnHome;
@@ -86,6 +87,8 @@ public class FrmEdicaoEstudio extends JFrame {
                     "Código", "Nome"
                 }
         ));
+        table.setToolTipText("Escolha um estúdio para editar");
+        table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
         jScrollPane1.setViewportView(table);
 

@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import businessschedule.util.ModeloGrade;
+import java.awt.Cursor;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +140,8 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
                     "Código", "Horario Inicio", "Horario Final", "Data", "Funcionario", "Email", "Função","Data inicio","Data fim","Ano"
                 }
         ));
+        table.setToolTipText("Escolha um horário de um funcionário para editar");
+        table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
         jScrollPane1.setViewportView(table);
 

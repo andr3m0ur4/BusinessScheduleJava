@@ -16,6 +16,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import businessschedule.BusinessSchedule;
 import businessschedule.modelo.dao.AdministradorDAO;
 import businessschedule.modelo.dao.FuncionarioDAO;
 
@@ -129,7 +130,11 @@ public class FrmLogin extends JFrame {
                 AdministradorDAO dao = new AdministradorDAO();
                 
                 if (dao.login(txtEmail.getText(), txtSenha.getText())) {
-                    JOptionPane.showMessageDialog(null, "Sucesso");
+                    BusinessSchedule.usuario = true;
+
+                    FrmHome ini = new FrmHome();
+                    ini.setVisible(true);
+                    setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
                 }
@@ -137,7 +142,11 @@ public class FrmLogin extends JFrame {
                 FuncionarioDAO dao = new FuncionarioDAO();
 
                 if (dao.login(txtEmail.getText(), txtSenha.getText())) {
-                    JOptionPane.showMessageDialog(null, "Sucesso");
+                    BusinessSchedule.usuario = false;
+
+                    FrmHome ini = new FrmHome();
+                    ini.setVisible(true);
+                    setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Email e ou senha inválidos!");
                 }
