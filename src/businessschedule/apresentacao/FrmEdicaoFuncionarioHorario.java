@@ -1,10 +1,8 @@
 package businessschedule.apresentacao;
 
 import businessschedule.modelo.classes.Escala;
-import businessschedule.modelo.classes.Estudio;
 import businessschedule.modelo.classes.Funcionario;
 import businessschedule.modelo.classes.FuncionarioHorario;
-import businessschedule.modelo.classes.Switcher;
 import businessschedule.modelo.dao.EscalaDAO;
 import businessschedule.modelo.dao.FuncionarioDAO;
 import businessschedule.modelo.dao.FuncionarioHorarioDAO;
@@ -34,15 +32,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.MouseInputListener;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import lib.DataHora;
-
-import org.w3c.dom.events.MouseEvent;
 
 public class FrmEdicaoFuncionarioHorario extends JFrame {
     private JButton btnHome;
@@ -65,7 +58,6 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
     private JTextField txtHoraFinal;
     private JTextField txtData;
     private JTextField txtPesquisa;
-    private JTextField txtSenha;
     private JComboBox<Funcionario> cbFuncionario;
     private JComboBox<Escala> cbEscala;
     private int id;

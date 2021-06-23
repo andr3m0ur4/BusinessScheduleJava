@@ -182,6 +182,25 @@ public class FuncionarioHorarioDAO {
         return rs;
     }
 
+    public ResultSet carregarEscalaGrade() {
+        String sql = "SELECT f.nome, f.funcao, fh.horario_inicio, fh.horario_fim, fh.data, e.data_inicio, e.data_fim\n" +
+                    "FROM funcionarioHorario AS fh\n" +
+                    "INNER JOIN funcionario AS f\n" +
+                    "ON fh.id_funcionario = f.id\n" +
+                    "INNER JOIN escala AS e\n" +
+                    "ON fh.id_escala = e.id\n" +
+                    "ORDER BY f.nome, fh.data";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public void close() {
         try {
             rs.close();

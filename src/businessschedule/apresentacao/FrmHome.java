@@ -11,7 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
+
+import businessschedule.modelo.classes.FuncionarioHorario;
+import businessschedule.modelo.dao.FuncionarioHorarioDAO;
+import businessschedule.util.ModeloGrade;
+import lib.DataHora;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -44,15 +48,10 @@ public class FrmHome extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        table.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        table.setModel(new ModeloGrade(
+            new FuncionarioHorarioDAO().carregarEscalaGrade(),
+            new String[] {
+                "Nome", "Função", "Horário inicial", "Horário final", "Data", "Data Inicial", "Data Final"
             }
         ));
         jScrollPane1.setViewportView(table);
@@ -70,6 +69,8 @@ public class FrmHome extends JFrame {
 
         jLabel2.setFont(new Font("Segoe UI", 0, 48));
         jLabel2.setText("Escala semanal");
+
+        ajustarColunas();
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,6 +128,21 @@ public class FrmHome extends JFrame {
         int altura = (resolucao.height - tamanhoTela.height) / 2;
         
         setLocation(largura, altura);
+    }
+
+    private void ajustarColunas() {
+        FuncionarioHorario funcionarioHorario;
+
+        for (int i = 0; i < table.getRowCount(); i++) {
+            funcionarioHorario = new FuncionarioHorario(table.getValueAt(i, 4).toString());
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(funcionarioHorario.getData()), i, 4);
+
+            funcionarioHorario.setData(table.getValueAt(i, 5).toString());
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(funcionarioHorario.getData()), i, 5);
+
+            funcionarioHorario.setData(table.getValueAt(i, 6).toString());
+            table.setValueAt(DataHora.personalizarDataParaBrasileiro(funcionarioHorario.getData()), i, 6);
+        }
     }
 
     private class CadastrarListener implements ActionListener {
