@@ -271,6 +271,7 @@ public class FrmCadastroFuncionario extends JFrame {
                 dao.lastId(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
             );
             dao.inserir(funcionario);
+            dao.close();
 
             JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();

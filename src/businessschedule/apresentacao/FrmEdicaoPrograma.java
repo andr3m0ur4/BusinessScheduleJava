@@ -457,7 +457,6 @@ public class FrmEdicaoPrograma extends JFrame {
                 id, txtNome.getText(), txtHorarioInicial.getText() + ":00", txtHorarioFinal.getText()  + ":00", txtTipo.getText(), DataHora.converterData(txtData.getText()), switcher, estudio
             );
                 dao.alterar(programa);
-                dao.close();
                 JOptionPane.showMessageDialog(null, "Programa editado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
             }       

@@ -221,6 +221,7 @@ public class FrmCadastroSwitcher extends JFrame {
                 dao.lastId(), txtNome.getText()
             );
             dao.inserir(switcher);
+            dao.close();
 
             JOptionPane.showMessageDialog(null, "Switcher cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();

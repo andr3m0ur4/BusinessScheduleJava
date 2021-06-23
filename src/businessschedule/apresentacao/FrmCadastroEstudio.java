@@ -221,6 +221,7 @@ public class FrmCadastroEstudio extends JFrame {
                      dao.lastId(), txtNome.getText()
                 );
                 dao.inserir(estudio);
+                dao.close();
 
                 JOptionPane.showMessageDialog(null, "Estudio cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
