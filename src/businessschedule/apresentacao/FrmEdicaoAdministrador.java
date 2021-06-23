@@ -102,12 +102,7 @@ public class FrmEdicaoAdministrador extends JFrame {
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new LimparListener());
 
-        table.setModel(new ModeloGrade(
-                new AdministradorDAO().carregarGrade(),
-                new String[] {
-                    "Código", "Nome", "Email", "Função"
-                }
-        ));
+        carregarTabela();
         table.setToolTipText("Escolha um administrador para editar");
         table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
@@ -165,6 +160,15 @@ public class FrmEdicaoAdministrador extends JFrame {
             new String[] {
                 "Código", "Nome", "Email", "Função"
             }
+        ));
+    }
+
+    private void carregarTabela() {
+        table.setModel(new ModeloGrade(
+                new AdministradorDAO().carregarGrade(),
+                new String[] {
+                    "Código", "Nome", "Email", "Função"
+                }
         ));
     }
 
@@ -243,7 +247,9 @@ public class FrmEdicaoAdministrador extends JFrame {
                     id, txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtFuncao.getText()
                 );
                 dao.alterar(administrador);
+
                 JOptionPane.showMessageDialog(null, "Administrador alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }
