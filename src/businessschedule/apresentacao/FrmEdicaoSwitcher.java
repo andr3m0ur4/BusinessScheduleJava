@@ -81,12 +81,7 @@ public class FrmEdicaoSwitcher extends JFrame {
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new LimparListener());
 
-        table.setModel(new ModeloGrade(
-                new SwitcherDAO().carregarGrade(),
-                new String[] {
-                    "Código", "Nome"
-                }
-        ));
+        carregarTabela();
         table.setToolTipText("Escolha um switcher para editar");
         table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
@@ -140,6 +135,15 @@ public class FrmEdicaoSwitcher extends JFrame {
             new String[] {
                 "Código", "Nome"
             }
+        ));
+    }
+
+    private void carregarTabela() {
+        table.setModel(new ModeloGrade(
+                new SwitcherDAO().carregarGrade(),
+                new String[] {
+                    "Código", "Nome"
+                }
         ));
     }
 
@@ -216,6 +220,7 @@ public class FrmEdicaoSwitcher extends JFrame {
                 );
                 dao.alterar(switcher);
                 JOptionPane.showMessageDialog(null, "Switcher alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

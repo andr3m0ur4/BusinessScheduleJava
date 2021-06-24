@@ -134,12 +134,7 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new LimparListener());
 
-        table.setModel(new ModeloGrade(
-                new FuncionarioHorarioDAO().carregarGrade(),
-                new String[] {
-                    "Código", "Horario Inicio", "Horario Final", "Data", "Funcionario", "Email", "Função","Data inicio","Data fim","Ano"
-                }
-        ));
+        carregarTabela();
         table.setToolTipText("Escolha um horário de um funcionário para editar");
         table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
@@ -239,6 +234,15 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
         }
     }
 
+    private void carregarTabela() {
+        table.setModel(new ModeloGrade(
+                new FuncionarioHorarioDAO().carregarGrade(),
+                new String[] {
+                    "Código", "Horario Inicio", "Horario Final", "Data", "Funcionario", "Email", "Função","Data inicio","Data fim","Ano"
+                }
+        ));
+    }
+
     private class LimparListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -324,7 +328,8 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
                     id, txtHoraInicial.getText() + ":00", txtHoraFinal.getText() + ":00", DataHora.converterData(txtData.getText()), funcionario, escala
                 );
                 dao.alterar(funcionarioHorario);
-                JOptionPane.showMessageDialog(null, "Horario alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Horário do funcionário alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }
