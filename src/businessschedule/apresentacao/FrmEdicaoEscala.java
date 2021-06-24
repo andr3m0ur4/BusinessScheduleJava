@@ -269,6 +269,7 @@ public class FrmEdicaoEscala extends JFrame {
                 dao.alterar(escala);
                 JOptionPane.showMessageDialog(null, "Escala alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 carregarTabela();
+                ajustarColunas();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

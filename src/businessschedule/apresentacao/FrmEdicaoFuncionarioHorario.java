@@ -331,6 +331,7 @@ public class FrmEdicaoFuncionarioHorario extends JFrame {
                 dao.alterar(funcionarioHorario);
                 JOptionPane.showMessageDialog(null, "Horário do funcionário alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 carregarTabela();
+                ajustarColunas();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

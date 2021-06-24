@@ -341,6 +341,7 @@ public class FrmEdicaoPrograma extends JFrame {
                 dao.alterar(programa);
                 JOptionPane.showMessageDialog(null, "Programa editado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 carregarTabela();
+                ajustarColunas();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }   
