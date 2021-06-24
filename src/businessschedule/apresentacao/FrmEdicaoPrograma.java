@@ -475,9 +475,9 @@ public class FrmEdicaoPrograma extends JFrame {
                             .addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26))))
-        );
+            );
 
-        pack();
+            pack();
             
         }
 }
