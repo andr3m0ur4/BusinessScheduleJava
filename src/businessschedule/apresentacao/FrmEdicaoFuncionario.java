@@ -102,12 +102,8 @@ public class FrmEdicaoFuncionario extends JFrame {
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new LimparListener());
 
-        table.setModel(new ModeloGrade(
-                new FuncionarioDAO().carregarGrade(),
-                new String[] {
-                    "Código", "Nome", "Email", "Função"
-                }
-        ));
+        carregarTabela();
+        
         table.setToolTipText("Escolha um funcionário para editar");
         table.setCursor(new Cursor(Cursor.HAND_CURSOR));
         table.addMouseListener(new TableMouseListener());
@@ -165,6 +161,15 @@ public class FrmEdicaoFuncionario extends JFrame {
             new String[] {
                 "Código", "Nome", "Email", "Função"
             }
+        ));
+    }
+    
+    private void carregarTabela() {
+        table.setModel(new ModeloGrade(
+                new FuncionarioDAO().carregarGrade(),
+                new String[] {
+                    "Código", "Nome", "Email", "Função"
+                }
         ));
     }
 
@@ -244,6 +249,7 @@ public class FrmEdicaoFuncionario extends JFrame {
                 );
                 dao.alterar(funcionario);
                 JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }

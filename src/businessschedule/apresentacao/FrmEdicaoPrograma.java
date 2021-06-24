@@ -326,16 +326,15 @@ public class FrmEdicaoPrograma extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             if (verificarCampos()) {
-            Switcher switcher = (Switcher) cbSwitcher.getSelectedItem();
-            Estudio estudio = (Estudio) cbEstudio.getSelectedItem();
+                Switcher switcher = (Switcher) cbSwitcher.getSelectedItem();
+                Estudio estudio = (Estudio) cbEstudio.getSelectedItem();
                
-            ProgramaDAO dao = new ProgramaDAO();
-            Programa programa = new Programa(
+                ProgramaDAO dao = new ProgramaDAO();
+                Programa programa = new Programa(
                 id, txtNome.getText(), txtHorarioInicial.getText() + ":00", txtHorarioFinal.getText()  + ":00", txtTipo.getText(), DataHora.converterData(txtData.getText()), switcher, estudio
             );
                 dao.alterar(programa);
                 JOptionPane.showMessageDialog(null, "Programa editado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                limpar();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }   
