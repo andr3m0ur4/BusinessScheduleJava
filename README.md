@@ -1,7 +1,7 @@
 # Business Schedule Java :calendar::clock1:
 
 Business Schedule Java is a desktop software to manage working time for a company.
-It was developed using programming language Java, paradigm Object-Oriented Programming, MVC as archteture, Data Access Object as design pattern and database SQLite.
+It was developed using programming language Java, paradigm Object-Oriented Programming, MVC as architecture, Data Access Object as design pattern and database SQLite.
 
 ## Installation :computer:
 
