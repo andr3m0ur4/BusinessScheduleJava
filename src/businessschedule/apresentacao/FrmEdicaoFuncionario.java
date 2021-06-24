@@ -138,6 +138,7 @@ public class FrmEdicaoFuncionario extends JFrame {
         int altura = (resolucao.height - tamanhoTela.height) / 2;
         
         setLocation(largura, altura);
+        setResizable(false);
     }
 
     private void limpar() {
